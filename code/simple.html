@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <code>
+    def code(): 
+        print 1
+    </code>
+    <blockquote>
+        Small one step in moon, large step for human.
+    </blockquote>
+    <div>
+        <a href="http://www.baidu.com" id="diva">Click Here to go to baidu</a>
+    </div>
+
+    <div id="eleFloat1">
+        <h3>world</h3>
+        <p>当你需要搜索一个比直接匹配需要更多条件的匹配时
+        <p>简单的模式是由你找到的直接匹配所构成的。</p>
+    </div>
+
+
+    <div id="eleC">
+        <h3>hello world</h3>
+        <p>The order within each animation definition is also important for distinguishing animation-name values from other keywords.
+        When parsed, keywords that are valid for properties other than animation-name, and whose values were not found earlier in the shorthand, 
+        must be accepted for those properties rather than for animation-name.</p>
+        <p>Furthermore, when serialized, default values of other properties must be output in at least the cases necessary to distinguish an animation-name 
+        that could be a value of another property, and may be output in additional cases.</p>
+    </div>
+
+    <em id="em">flex-direction</em><p id="p"> 是用来确定主轴方向的</p>
+    <div id="eleFloat2">
+        <h3>world</h3>
+        <p>比如， 模式/ab*c/匹配了一个单独的 'a'</p>
+        <p>在上面的两个实例中，匹配的是子字符串 'abc'。</p>
+    </div>
+
+    <div id="eleD">
+            <h3>hello world</h3>
+            <p>The order within each animation definition is also important for distinguishing animation-name values from other keywords.
+            When parsed, keywords that are valid for properties other than animation-name, and whose values were not found earlier in the shorthand, 
+            must be accepted for those properties rather than for animation-name.</p>
+            <p>Furthermore, when serialized, default values of other properties must be output in at least the cases necessary to distinguish an animation-name 
+            that could be a value of another property, and may be output in additional cases.</p>
+        </div>
+
+        
+    <style>
+        #diva:link { color: red; }
+        #diva:visited { color: blue; }
+        #diva:hover { color: green; }
+        #diva:focus { color: yellow; }
+        #diva:active { color: grey; }
+
+        #eleFloat1, #eleFloat2 {
+            float: right;
+            width: 200px;
+            border: 1px solid red;
+        }
+        #eleC, #eleD { margin-right: 200px; }
+
+        .toolTip {
+            background: #fff;
+            border: 1px solid #000;
+            border-radius: 8px;
+            font-size: 15px;
+            padding: 0.5em 1em;
+            position: absolute;
+            display: none;
+            max-width: 40em;
+        }
+        .toolTip::before {
+            content: "";
+            width: 0;
+            height: 0;
+            border-left: 0.5em solid transparent;
+            border-right: 0.5em solid transparent;
+            border-bottom: 0.5em solid black;
+            position: absolute;
+            margin-top: -1em;
+            margin-left: -0.5em;
+        }
+    </style>
+
+    <script>
+        function insertAfter(newElement, archorElement) {
+            if (archorElement.nextSibling) {
+                return archorElement.parentNode.insertBefore(newElement, archorElement.nextSibling);
+            }
+            return archorElement.parentNode.appendChild(newElement);
+        }
+
+        function popUpTip(ele, msg) {
+        if (typeof msg !== 'string') {
+            throw new TypeError("Tooltip message type is not string.", "popUpTip", 79);
+        }
+        function setTipStyle(pop) {
+            pop.sourceEle.style.cursor = "pointer";
+            pop.popUpEle.classList.add("toolTip");
+            pop.popUpEle.innerText = msg;
+            
+            pop.sourceEle.addEventListener("click", (event) => {
+            if (pop.isAppeared) {
+                pop.popUpEle.style.display = "none";
+                pop.isAppeared = false;
+            } else {
+                pop.popUpEle.style.display = "block";
+                pop.isAppeared = true;
+            }
+            }, false);
+        }
+
+        var popUp = {
+            popUpEle: document.createElement("div"),
+            sourceEle: ele,
+            isAppeared: false,
+            msg: msg
+        }
+        setTipStyle(popUp);
+        insertAfter(popUp.popUpEle, ele);
+
+        return popUp;
+        };
+        var p = document.getElementById("p");
+        var em = document.getElementById("em");
+        popUpTip(p, "可能属性值：column");
+        popUpTip(em, "可能属性值：row");
+    </script>
+</body>
+</html>

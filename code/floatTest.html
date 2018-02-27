@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="one">
+        <div id="eleFloat1">
+            <h3>第一个浮动元素</h3>
+            <p>css属性为right</p>
+        </div>
+
+        <div id="eleA">
+            <h3>不设置右外边距Margin</h3>
+            <p>浮动看上去就像是把元素往某个方向（float属性的值）移动，然后把他在这个区域中删除。如果主内容不设置外边距的话，当主内容内容过多的时候，主内容就会把浮动元素包裹</p>
+        </div>
+
+        <div id="eleFloat2">
+            <h3>未设置清除浮动</h3>
+            <p>css属性为right</p>
+        </div>
+
+        <div id="eleB">
+            <h3>设置右外边距Margin</h3>
+            <p>浮动的必要条件：该元素必须设置宽度属性（width），否则无效</p>
+            <p>可以看到，当设置右外边距的时候，就不会出现包裹的现象</p>
+        </div>
+    </div>
+
+    <div id="two">
+        <div id="eleFloat3">
+            <h3>参考元素</h3>
+            <p>
+                这里讨论一种Float的副作用，浮动
+            </p>
+        </div>
+
+        <div id="eleC">
+            <h3>浮动</h3>
+            <p>浮动的基本属性left;right;none;inline-start;inline-end; 和 inherit;initial;unset;</p>
+        </div>
+
+        <div id="eleFloat4">
+            <h3>未清除浮动</h3>
+            <p>
+                在没有清除浮动时，如果有浮动元素“越界”，可以看到元素“越界”
+            </p>
+        </div>
+
+        <div id="eleD">
+            <h3>浮动的副作用</h3>
+            <p>这种情况可以理解为是所有的浮动元素处于一个特殊的区域内，浮动元素之间当然会发生“拥挤”</p>
+        </div>
+
+        <div id="longD">
+            <h3>被浮动所困扰的元素</h3>
+        </div>
+
+        <div id="eleFloat5">
+            <h3>清除浮动</h3>
+            <p>
+                在这种情况下，可以设置该元素clear属性来清除浮动(这里为right)
+            </p>
+        </div>
+
+        <div id="eleE">
+            <h3>解决浮动的副作用</h3>
+            <p>clear的基本属性是none;left;right;both;inline-start;inline-end; 和 inherit;initial;unset;</p>
+            <p>注意，什么元素被浮动所困扰就对什么元素设置clear属性，而不是每次都对浮动的元素设置clear</p>
+        </div>
+
+        <div id="longE">
+            <h3>不被浮动所困扰的元素：对该元素设置clear</h3>
+        </div>
+    </div>
+
+    <style>
+        #one, #two {
+            display: inline-block;
+            width: 700px;
+            height: 400px;
+            margin: 0 auto;
+            border: 2px solid blue;
+            overflow-y: auto;
+        }
+
+        #eleFloat1, #eleFloat2 {
+            float: right;
+            width: 400px;
+            border: 1px solid red;
+            background: grey;
+        }
+        #eleFloat3, #eleFloat4, #eleFloat5 {
+            float: right;
+            width: 200px;
+            border: 1px solid red;
+            background: grey;
+        }
+        #eleFloat5 {
+            clear: right;
+        }
+        #eleA, #eleB { background: yellowgreen; }
+        #eleB { margin-right: 400px; }
+        #eleC, #eleD, #eleE { margin-right: 200px; }
+
+        #longD, #longE {
+            text-align: center;
+            border: 1px solid green;
+            background: yellowgreen;
+        }
+        #longE { clear: right; }
+    </style>
+</body>
+</html>

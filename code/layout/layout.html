@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="总结一些常用的布局，分析优缺点">
+    <title>布局</title>
+
+</head>
+<body>
+    <aside>
+        <ul>
+            <li>
+                <a href="#section">常用布局示例与分析</a>
+            </li>
+            <li>
+                <a href="#section1">1. 文档流布局</a>
+            </li>
+            <li>
+                <a href="#section2">2. 浮动/流体布局</a>
+            </li>
+            <li>
+                <a href="#section3">3. 定位布局</a>
+            </li>
+            <li>
+                <a href="#section4">4. 弹性盒子布局</a>
+            </li>
+        </ul>
+    </aside>
+
+    <article>
+        <h1 id="section">常用布局示例与分析</h1>
+        <time datetime="2018-01-11">更新日期：2018/1/11</time>
+
+        <p class="overView">列举常用的布局，以及分析他们的优势和劣势。</p>
+        <p class="overView">PS:DEMO借助了jsfiddle而现在它需要翻墙才能访问，因此DEMO的效果也需要翻墙才能访问 (-.-|||</p>
+        <section id="section1">
+            <h2>文档流布局(stream)</h2>
+            <p>这是最基本的布局方式，就是按照文档的顺序一个一个显示出来，块元素独占一行，行内元素共享一行，这个相信大家都比较熟悉了，就不再赘述了</p>
+        </section>
+
+        <section id="section2">
+            <h2>浮动/流体布局(liquid)</h2>
+            <p>使用float实现的简单布局：通过float属性把元素与文档流隔离，再对主内容使用margin进行偏移。</p>
+            <iframe width="100%" height="200" src="http://jsfiddle.net/hugoOrange/2zk78ve6/embedded/result,html,css" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+        </section>
+
+        <section id="section3">
+            <h2>定位布局(position)</h2>
+            <p>我们也可以通过 position 属性来进行定位。</p>
+            <p>常用的属性包括 absolute relative 和 fixed ，主要是用left等位移属性进行定位。</p>
+        </section>
+
+        <section id="section4">
+            <h2>弹性盒子布局(flex box)</h2>
+            <p>弹性布局是指通过调整其内元素的宽高，从而在任何显示设备上实现对可用显示空间最佳填充的能力。弹性容器扩展其内元素来填充可用空间，或将其收缩来避免溢出。</p>
+            <p>弹性盒子是css3的新属性。</p>
+            <p>flex 的使用方法很简单，只需要将其 display 属性设置为 flex 就可以，也可以设置行内的 flex，记得 Webkit 内核的浏览器，必须加上 -webkit 前缀。注意，设为 Flex 布局以后，子元素的 float、clear 和 vertical-align 属性将失效。</p>            
+            <pre>
+.ele{
+    display: -webkit-flex;
+    display: flex;
+    display: inline-flex;
+    display: -webkit-inline-flex;
+}</pre>
+
+            <h3 id="section4_1">基本概念</h3>
+            <img src="flexbox.png" alt="弹性盒子由类似坐标轴的标尺将容器内的元素分隔放置">
+            <p>父容器有以下属性：</p>
+            <ul>
+                <li>- <em class="toolTip" data-tip="可能取值：row,row-reverse,column,column-reverse">flex-direction</em> 确立主轴方向</li>
+                <li>- <em class="toolTip" data-tip="可能取值：nowrap,wrap,wrap-reverse">flex-wrap</em> 子元素溢出时</li>
+                <li>- <em class="toolTip" data-tip="可能取值：">flex-flow</em> flex-direction 属性和 flex-wrap 属性的简写形式</li>
+                <li>- <em class="toolTip" data-tip="可能取值：flex-start,flex-end,center,space-between,space-around">justify-content</em> 一行的弹性项目沿主轴如何排布</li>
+                <li>- <em class="toolTip" data-tip="可能取值：flex-start,flex-end,center,baseline,stretch">align-items</em> 每行的弹性项目沿交叉轴如何排布</li>
+                <li>- <em class="toolTip" data-tip="可能取值：flex-start,flex-end,center,space-between,space-around,stretch">align-content</em> 多行的弹性项目沿主轴如何排布</li>
+            </ul>
+            <p>align-items 和 align-content 的区别在于前者相当于对每个容器内元素进行对齐，而后者是对一行进行处理</p>
+
+            <p>子容器也有 6 个属性：</p>
+            <ul>
+                <li>- <em class="toolTip" data-tip="可能取值：非负整数，默认为0">order</em> 子容器的排列顺序</li>
+                <li>- <em class="toolTip" data-tip="可能取值：非负整数">flex-grow</em> 子容器所占空间的比例</li>
+                <li>- <em class="toolTip" data-tip="可能取值：非负整数">flex-shrink</em> 子容器超出空间的压缩比例（父容器设置flex-wrap为nowrap才能生效）</li>
+                <li>- <em class="toolTip" data-tip="可能取值：auto或者尺寸值">flex-basis</em> 子容器在不伸缩情况下的原始尺寸</li>
+                <li>- <em class="toolTip" data-tip="略">flex</em> 子元素的 flex 属性是 flex-grow,flex-shrink 和  flex-basis 的简写</li>
+                <li>- <em class="toolTip" data-tip="可能取值：flex-start,flex-end,center,baseline,stretch">align-self</em> 定义了单个弹性项目在交叉轴上应当如何对齐，这个定义会覆盖由 align-items 所确立的默认值</li>
+            </ul>
+
+            <iframe width="100%" height="400" src="http://jsfiddle.net/hugoOrange/q897zkLt/embedded/result,html,css,js" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+            <p>弹性盒子的优势在于：</p>
+            <ul>
+                <li>- 页面能够适应不同的屏幕尺寸和不同的显示设备时，元素可预测的运行</li>
+            </ul>
+
+            <p>弹性盒子的劣势在于：</p>
+            <ul>
+                <li>- 兼容性，chrome21+, opera12.1+, IE10+, Safari6.1+, Firefox22+</li>
+            </ul>
+        </section>
+
+        <section id="section5">
+            <h2>网格布局(grid)</h2>
+        </section>
+    </article>
+
+    <footer></footer>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/tip.js"></script>
+    <script>
+        toolTip.popUpTipFromClass();
+    </script>
+</body>
+</html>

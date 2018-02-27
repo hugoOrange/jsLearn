@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>常用函数</title>
+</head>
+<body>
+    
+    <script>
+        function findSubstr(str, match) {
+            var position = new Array();
+            var pos = str.index(match);
+            while (pos > -1) {
+                position.push(pos);
+                pos = str.index(match, pos + 1);
+            }
+            return position;
+        }
+    </script>
+</body>
+</html>

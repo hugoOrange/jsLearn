@@ -1,0 +1,533 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+  <meta name="author" content="running_snail">
+  <meta name="description" content="学习总结浮动和它的工作原理，及清除浮动的方法及原理集锦。探索浮动与清除浮动的奥妙。PS:DEMO借助了jsfiddle而现在它需要翻墙才能访问，
+  因此DEMO的效果也需要翻墙才能访问浮动和它的工作原理“浮动的框可以向左或向右移动，直到它的外边缘碰到包含框或另一个浮动框的边框为止">
+
+  <title>【CSS】浮动和它的工作原理？清除浮动的技巧？</title>
+</head>
+
+  <body>
+  <div id="container">
+  <div id="main" class="post" itemscope="itemscope" itemprop="blogPost">
+  <article itemprop="articleBody">
+  <header class="article-info clearfix">
+  <h1 itemprop="name">
+
+  <a
+  href="/2014/08/20/浮动和它的工作原理？清除浮动的技巧？/"
+  title="【CSS】浮动和它的工作原理？清除浮动的技巧？"
+  itemprop="url">【CSS】浮动和它的工作原理？清除浮动的技巧？</a>
+  </h1>
+  <p class="article-author">By
+
+  <a
+  href="https://plus.google.com/104285874726961350000?rel=author"
+  title="running_snail"
+  target="_blank"
+  itemprop="author">running_snail</a>
+  </p>
+  <p class="article-time">
+  <time datetime="2014-08-20T08:46:45.000Z" itemprop="datePublished">8月 20 2014</time>
+  更新日期:<time datetime="2015-02-28T08:38:40.000Z" itemprop="dateModified">2月 28 2015</time>
+
+  </p>
+  </header>
+  <div class="article-content">
+
+  <div id="toc" class="toc-article">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc">
+  <li class="toc-item toc-level-2">
+  <a class="toc-link" href="#浮动和它的工作原理">
+  <span class="toc-number">1.</span>
+  <span class="toc-text">浮动和它的工作原理</span></a>
+  <ol class="toc-child">
+  <li class="toc-item toc-level-3">
+  <a class="toc-link" href="#浮动布局：">
+  <span class="toc-number">1.1.</span>
+  <span class="toc-text">浮动布局：</span></a>
+  </li>
+  <li class="toc-item toc-level-3">
+  <a class="toc-link" href="#float属性：">
+  <span class="toc-number">1.2.</span>
+  <span class="toc-text">float属性：</span></a>
+  </li>
+  </ol>
+  </li>
+  <li class="toc-item toc-level-2">
+  <a class="toc-link" href="#怎样清除浮动呢？">
+  <span class="toc-number">2.</span>
+  <span class="toc-text">怎样清除浮动呢？</span></a>
+  <ol class="toc-child">
+  <li class="toc-item toc-level-3">
+  <a class="toc-link" href="#闭合浮动的方法：">
+  <span class="toc-number">2.1.</span>
+  <span class="toc-text">闭合浮动的方法：</span></a>
+  <ol class="toc-child">
+  <li class="toc-item toc-level-4">
+  <a class="toc-link" href="#方法一（差）：添加额外标签">
+  <span class="toc-number">2.1.1.</span>
+  <span class="toc-text">方法一（差）：添加额外标签</span></a>
+  </li>
+  <li class="toc-item toc-level-4">
+  <a class="toc-link" href="#方法二（差）：使用br标签及自身html属性">
+  <span class="toc-number">2.1.2.</span>
+  <span class="toc-text">方法二（差）：使用br标签及自身html属性</span></a>
+  </li>
+  <li class="toc-item toc-level-4">
+  <a class="toc-link" href="#方法三（差）：父元素设置overflow属性">
+  <span class="toc-number">2.1.3.</span>
+  <span class="toc-text">方法三（差）：父元素设置overflow属性</span></a>
+  </li>
+  <li class="toc-item toc-level-4">
+  <a class="toc-link" href="#方法四（差）：父元素也设置浮动">
+  <span class="toc-number">2.1.4.</span>
+  <span class="toc-text">方法四（差）：父元素也设置浮动</span></a>
+  </li>
+  <li class="toc-item toc-level-4">
+  <a class="toc-link" href="#方法五（差）：父元素设置display:table">
+  <span class="toc-number">2.1.5.</span>
+  <span class="toc-text">方法五（差）：父元素设置display:table</span></a>
+  </li>
+  <li class="toc-item toc-level-4">
+  <a class="toc-link" href="#方法六（可）：使用:after伪元素">
+  <span class="toc-number">2.1.6.</span>
+  <span class="toc-text">方法六（可）：使用:after伪元素</span></a>
+  </li>
+  </ol>
+  </li>
+  <li class="toc-item toc-level-3">
+  <a class="toc-link" href="#闭合浮动的原理：">
+  <span class="toc-number">2.2.</span>
+  <span class="toc-text">闭合浮动的原理：</span></a>
+  </li>
+  </ol>
+  </li>
+  </ol>
+  </div>
+
+  <p>学习总结浮动和它的工作原理，及清除浮动的方法及原理集锦。探索浮动与清除浮动的奥妙。</p>
+  <p>PS:DEMO借助了<a href="http://jsfiddle.net/" target="_blank" rel="external">jsfiddle</a>而现在它需要翻墙才能访问，<br>因此DEMO的效果也需要翻墙才能访问 (-.-|||</p>
+  <hr>
+  <h2 id="浮动和它的工作原理">浮动和它的工作原理</h2>
+  <p>“浮动的框可以向左或向右移动，直到它的外边缘碰到包含框或另一个浮动框的边框为止。<br>由于浮动框不在文档的普通流中，所以文档的普通流中的块框表现得就像浮动框不存在一样。”</p>
+  <p>—
+  <a
+  href="http://www.w3school.com.cn/css/css_positioning_floating.asp"
+  target="_blank"
+  rel="external">W3School</a>
+  </p>
+  <p>浮动的框可以左右移动，直至它的外边缘遇到包含框或者另一个浮动框的边缘。浮动框不属于文档中的普通流，当一个元素浮动之后，不会影响到块级框的布局而只会影响内联框（通常是文本）的排列，文档中的普通流就会表现得和浮动框不存在一样，当浮动框高度超出包含框的时候，也就会出现包含框不会自动伸高来闭合浮动元素（“高度塌陷”现象）。顾名思义，就是漂浮于普通流之上，像浮云一样，但是只能左右浮动。</p>
+  <hr>
+  <h3 id="浮动布局：">浮动布局：</h3>
+  <ul>
+  <li>浮动布局是CSS中规定的第二种定位机制。 (<a
+  href="http://www.w3school.com.cn/css/css_positioning.asp"
+  target="_blank"
+  rel="external">CSS 有三种基本的定位机制：普通流、浮动和绝对定位。</a>)</li>
+  <li>能够实现横向多列布局。（常见的为横向两列布局，横向三列布局）</li>
+  <li>通过设置float属性实现。</li>
+  </ul>
+  <hr>
+  <h3 id="float属性：">float属性：</h3>
+  <p>
+  <em>3个属性值</em>：</p>
+  <ul>
+  <li>left - 左浮动</li>
+  <li>right - 右浮动</li>
+  <li>none - 不浮动</li>
+  </ul>
+  <p>
+  <em>特点</em>：<br>元素会左移，或右移，直至触碰到容器为止。<br>
+  <em>设置了浮动的元素仍旧处于标准文档流中。</em>会占据标准文档流空间，对其他元素有影响。</p>
+  <p>浮动DEMO-1 (box1左浮动)：</p>
+  <iframe
+  width="100%"
+  height="300"
+  src="http://jsfiddle.net/hugoOrange/hm0s7o7d/embedded/"
+  allowpaymentrequest="allowpaymentrequest"
+  allowfullscreen="allowfullscreen"
+  frameborder="0"></iframe>
+  <p>上例box1设置了float:left; 和 height:100px;<br>当box1没有内容的时候,float:left;的作用使得此div尺寸得不到扩展，将缩成一个小圆点出现在body标签的左上角。<br>box1沿着它的容器(此例中box1的容器为body标签)左浮动。</p>
+  <p>浮动DEMO-2 (box1左浮动)：</p>
+  <iframe
+  width="100%"
+  height="300"
+  src="http://jsfiddle.net/hugoOrange/mqdtkdvs/embedded/"
+  allowpaymentrequest="allowpaymentrequest"
+  allowfullscreen="allowfullscreen"
+  frameborder="0"></iframe>
+  <p>浮动DEMO-3 (box1左浮动,box2右浮动)：</p>
+  <iframe
+  width="100%"
+  height="300"
+  src="http://jsfiddle.net/hugoOrange/s52mz2j7/embedded/"
+  allowpaymentrequest="allowpaymentrequest"
+  allowfullscreen="allowfullscreen"
+  frameborder="0"></iframe>
+  <p>浮动DEMO-4 (box1左浮动,box2左浮动)：</p>
+  <iframe
+  width="100%"
+  height="300"
+  src="http://jsfiddle.net/hugoOrange/8sgxd34f/embedded/"
+  allowpaymentrequest="allowpaymentrequest"
+  allowfullscreen="allowfullscreen"
+  frameborder="0"></iframe>
+  <p>浮动DEMO-5 (box1,box2都不浮动，且都在class=”wrap”的div容器中)：</p>
+  <iframe
+  width="100%"
+  height="300"
+  src="http://jsfiddle.net/hugoOrange/671sa2yo/embedded/"
+  allowpaymentrequest="allowpaymentrequest"
+  allowfullscreen="allowfullscreen"
+  frameborder="0"></iframe>
+  <p>浮动DEMO-6 (box1,box2左浮动，且都在class=”wrap”的div容器中)：</p>
+  <iframe
+  width="100%"
+  height="300"
+  src="http://jsfiddle.net/hugoOrange/bve7j75d/embedded/"
+  allowpaymentrequest="allowpaymentrequest"
+  allowfullscreen="allowfullscreen"
+  frameborder="0"></iframe>
+  <p>浮动DEMO-5、浮动DEMO-6
+  观察class=”wrap”的元素的黑色的border，DEMO-5中的wrap为正常高度，DEMO-6中wrap的高度为0。</p>
+  <p>
+  <em>为什么会出现“高度塌陷”这样的现象？</em>
+  </p>
+  <p>我们先看看什么是浮动：<br>浮动：浮动的框可以左右移动，直至它的外边缘遇到包含框或者另一个浮动框的边缘。浮动框不属于文档中的普通流，当一个元素浮动之后，不会影响到块级框的布局而只会影响内联框（通常是文本）的排列，文档中的普通流就会表现得和浮动框不存在一样，当浮动框高度超出包含框的时候，也就会出现包含框不会自动伸高来闭合浮动元素（“高度塌陷”现象）。顾名思义，就是漂浮于普通流之上，像浮云一样，但是只能左右浮动。</p>
+  <p>正是因为浮动的这种特性，导致本属于普通流中的元素浮动之后，包含框内部由于不存在其他普通流元素了，也就表现出高度为0（高度塌陷）。在实际布局中，往往这并不是我们所希望的，所以需要闭合浮动元素，使其包含框表现出正常的高度。</p>
+  <p>
+  <em>总结</em>：</p>
+  <ul>
+  <li>当元素没有设置宽度值，而设置了浮动属性，元素的宽度随内容的宽度的变化而变化。</li>
+  <li>当元素设置浮动属性后，会对相邻的元素产生影响，相邻元素特指紧邻后面的元素。</li>
+  <li>当一个包含框中的元素全设置了浮动时，改包含框会出现“高度塌陷”现象。</li>
+  </ul>
+  <p>
+  <em>思考</em>：<br>当设置浮动元素时，紧邻其后的元素会受到浮动元素的影响，且其父元素可能出现高度塌陷，这样可能会使布局错乱，所以我们需要想办法来清除浮动。</p>
+  <hr>
+  <h2 id="怎样清除浮动呢？">怎样清除浮动呢？</h2>
+  <p>首先我们先弄清楚一下概念，其实大家习惯称为“清除浮动”实际上应该称作“闭合浮动”。</p>
+  <ul>
+  <li>清除浮动：清除对应的单词是 clear，对应CSS中的属性是 clear：left | right | both | none；</li>
+  <li>闭合浮动：更确切的含义是使浮动元素闭合，从而减少浮动带来的影响。</li>
+  </ul>
+  <p>我们想要达到的效果确切的说是闭合浮动，而不是单纯的清除浮动，单纯的清除浮动，并不能解决容器高度塌陷的问题。</p>
+  <hr>
+  <h3 id="闭合浮动的方法：">闭合浮动的方法：</h3>
+  <h4 id="方法一（差）：添加额外标签">方法一（差）：添加额外标签</h4>
+  <p>在浮动元素末尾添加一个新标签，例如：<br>&lt;div style=”clear:both;”&gt;&lt;/div&gt; (清除float:left 和 float:right的影响)<br>&lt;div
+  style=”clear:left;”&gt;&lt;/div&gt; (清除float:left的影响，如果是float:right造成的浮动影响这样写无用)<br>&lt;div
+  style=”clear:right;”&gt;&lt;/div&gt;
+  (清除float:right的影响，如果是float:left造成的浮动影响这样写无用)<br>其他标签br等亦可，看情况加入n个br标签(极不推荐，因为高度变了，代码也要变，维护起来要抓狂的)</p>
+  <p>DEMO:</p>
+  <iframe
+  width="100%"
+  height="300"
+  src="http://jsfiddle.net/hugoOrange/oay2m13d/embedded/"
+  allowpaymentrequest="allowpaymentrequest"
+  allowfullscreen="allowfullscreen"
+  frameborder="0"></iframe>
+  <p>
+  <strong>优点</strong>：通俗易懂，容易掌握<br>
+  <strong>缺点</strong>：将添加很多无意义的空标签，有违结构与表现的分离，后期维护会是噩梦。</p>
+  <h4 id="方法二（差）：使用br标签及自身html属性">方法二（差）：使用br标签及自身html属性</h4>
+  <p>这个方法有些小众，br 有 clear=“all | left | right | none” 属性<br>&lt;br clear=”all” /&gt; (清除float:left 和 float:right的影响)<br>&lt;br clear=”left “ /&gt; (清除float:left的影响，如果是float:right造成的浮动影响这样写无用)<br>&lt;br clear=”right” /&gt; (清除float:right的影响，如果是float:left造成的浮动影响这样写无用)</p>
+  <p>DEMO:</p>
+  <iframe
+  width="100%"
+  height="300"
+  src="http://jsfiddle.net/hugoOrange/dymxytc8/embedded/"
+  allowpaymentrequest="allowpaymentrequest"
+  allowfullscreen="allowfullscreen"
+  frameborder="0"></iframe>
+
+  <p>
+  <strong>优点</strong>：比空标签方式语义稍强，代码量较少<br>
+  <strong>缺点</strong>：同样有违结构与表现的分离，不推荐使用</p>
+  <h4 id="方法三（差）：父元素设置overflow属性">方法三（差）：父元素设置overflow属性</h4>
+  <p>通过设置父元素overflow值设置为hidden;在IE6中还需要触发hasLayout，例如zoom：1;</p>
+  <p>DEMO:</p>
+  <iframe
+  width="100%"
+  height="300"
+  src="http://jsfiddle.net/hugoOrange/uu01L20m/embedded/"
+  allowpaymentrequest="allowpaymentrequest"
+  allowfullscreen="allowfullscreen"
+  frameborder="0"></iframe>
+  <p>通过设置父元素overflow值设置为auto;在IE6中还需要触发hasLayout，例如zoom：1;</p>
+  <strong>优点</strong>：不存在结构和语义化问题，代码量极少<br>
+  <strong>缺点</strong>：overflow:hidden; 内容增多时候容易造成不会自动换行导致内容被隐藏掉，无法显示需要溢出的元素；不要使用<br>overflow:auto; 多层嵌套后，firefox与IE 可能会出现显示错误；不要使用</p>
+  <h4 id="方法四（差）：父元素也设置浮动">方法四（差）：父元素也设置浮动</h4>
+  <p>DEMO:</p>
+  <iframe
+  width="100%"
+  height="300"
+  src="http://jsfiddle.net/hugoOrange/wau6083q/embedded/"
+  allowpaymentrequest="allowpaymentrequest"
+  allowfullscreen="allowfullscreen"
+  frameborder="0"></iframe>
+
+  <p>
+  <strong>优点</strong>：不存在结构和语义化问题，代码量极少<br>
+  <strong>缺点</strong>：使得与父元素相邻的元素的布局会受到影响，不可能一直浮动到body，不推荐使用</p>
+  <h4 id="方法五（差）：父元素设置display:table">方法五（差）：父元素设置display:table</h4>
+  <p>DEMO:</p>
+  <iframe
+  width="100%"
+  height="300"
+  src="http://jsfiddle.net/hugoOrange/0ee23fsx/embedded/"
+  allowpaymentrequest="allowpaymentrequest"
+  allowfullscreen="allowfullscreen"
+  frameborder="0"></iframe>
+
+  <p>
+  <strong>优点</strong>：结构语义化完全正确，代码量极少<br>
+  <strong>缺点</strong>：盒模型属性已经改变，由此造成的一系列问题，得不偿失，不推荐使用</p>
+  <h4 id="方法六（可）：使用:after伪元素">方法六（可）：使用:after伪元素</h4>
+  <p>
+  <a
+  href="http://www.w3school.com.cn/cssref/pr_pseudo_after.asp"
+  target="_blank"
+  rel="external">:after 伪元素在元素之后添加内容。</a><br>IE6-7不支持:after,使用zoom:1触发 hasLayout。<br>详细请看：<a
+  href="http://www.positioniseverything.net/easyclearing.html"
+  target="_blank"
+  rel="external">How To Clear Floats Without Structural Markup</a>
+  </p>
+  <p>DEMO:</p>
+  <iframe
+  width="100%"
+  height="300"
+  src="http://jsfiddle.net/hugoOrange/4n7v1fdq/embedded/"
+  allowpaymentrequest="allowpaymentrequest"
+  allowfullscreen="allowfullscreen"
+  frameborder="0"></iframe>
+
+  <p>1) display:block 使生成的元素以块级元素显示,占满剩余空间;<br>2) height:0 避免生成内容破坏原有布局的高度。<br>3) visibility:hidden 使生成的内容不可见，并允许可能被生成内容盖住的内容可以进行点击和交互;<br>4）通过
+  content:”.”生成内容作为最后一个元素，至于content里面是点还是其他都是可以的，例如oocss里面就有经典的
+  content:”XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX”,有些版本可能content
+  里面内容为空,不推荐这样做的,firefox直到7.0 content:”” 仍然会产生额外的空隙；<br>5）zoom：1 触发IE hasLayout。<br>通过分析发现，除了clear：both用来闭合浮动的，其他代码无非都是为了隐藏掉content生成的内容，这也就是其他版本的闭合浮动为什么会有font-size：0，line-height：0。</p>
+  <p>优化方案一：<br>相对于空标签闭合浮动的方法代码似乎还是有些冗余，通过查询发现Unicode字符里有一个“零宽度空格”，也就是<a
+  href="http://www.fileformat.info/info/unicode/char/200b/index.htm"
+  target="_blank"
+  rel="external">U+200B</a>，这个字符本身是不可见的，所以我们完全可以省略掉 visibility:hidden了</p>
+  <p>DEMO:</p>
+  <iframe
+  width="100%"
+  height="300"
+  src="http://jsfiddle.net/hugoOrange/78u1tzha/embedded/"
+  allowpaymentrequest="allowpaymentrequest"
+  allowfullscreen="allowfullscreen"
+  frameborder="0"></iframe>
+  <p>优化方案二：<br>参看：<a
+  href="http://nicolasgallagher.com/micro-clearfix-hack/"
+  target="_blank"
+  rel="external">A new micro clearfix hack</a>
+  </p>
+  <p>
+  <strong>优点</strong>：结构和语义化完全正确,代码量居中<br>
+  <strong>缺点</strong>：复用方式不当会造成代码量增加</p>
+  <hr>
+  <h3 id="闭合浮动的原理：">闭合浮动的原理：</h3>
+  <p>以上方法，分为两类：</p>
+  <ol>
+  <li>在浮动元素末尾添加一个空元素 (方法一，二，六)</li>
+  <li>设置父元素overflow 或者 display:table 来闭合浮动 (方法三，四，五)</li>
+  </ol>
+  <p>为什么设置父元素overflow 或者 display:table 可以闭合浮动?<br>其原理为<br>
+  <a
+  href="http://www.w3.org/TR/CSS21/visuren.html#block-formatting"
+  target="_blank"
+  rel="external">
+  Block formatting contexts
+  </a>（块级格式化上下文），以下简称 BFC。<br>CSS3里面对这个规范做了改动，称之为：<a
+  href="http://www.w3.org/TR/css3-box/#block-level0"
+  target="_blank"
+  rel="external">
+  flow root
+  </a>，并且对触发条件进行了进一步说明。</p>
+  <p>
+  <strong>如何触发BFC?</strong>
+  </p>
+  <ul>
+  <li>float 除了none以外的值</li>
+  <li>overflow 除了visible 以外的值（hidden，auto，scroll ）</li>
+  <li>display (table-cell，table-caption，inline-block)</li>
+  <li>position（absolute，fixed）</li>
+  <li>fieldset元素</li>
+  </ul>
+  <p>需要注意的是，display:table 本身并不会创建BFC，但是它会产生匿名框(anonymous
+  boxes)，而匿名框中的display:table-cell可以创建新的BFC，换句话说，触发块级格式化上下文的是匿名框，而不是display:table。所以通过display:table和display:table-cell创建的BFC效果是不一样的。<br>fieldset
+  元素在www.w3.org里目前没有任何有关这个触发行为的信息，直到HTML5标准里才出现。有些浏览器bugs（Webkit，Mozilla）提到过这个触发行为，但是没有任何官方声明。实际上，即使fieldset在大多数的浏览器上都能创建新的块级格式化上下文，开发者也不应该把这当做是理所当然的。CSS
+  2.1没有定义哪种属性适用于表单控件，也没有定义如何使用CSS来给它们添加样式。用户代理可能会给这些属性应用CSS属性，建议开发者们把这种支持当做实验性质的，更高版本的CSS可能会进一步规范这个。</p>
+  <p>BFC的特性：</p>
+  <ul>
+  <li>块级格式化上下文会阻止外边距叠加<br>当两个相邻的块框在同一个块级格式化上下文中时，它们之间垂直方向的外边距会发生叠加。换句话说，如果这两个相邻的块框不属于同一个块级格式化上下文，那么它们的外边距就不会叠加。</li>
+  <li>块级格式化上下文不会重叠浮动元素<br>根据规定，一个块级格式化上下文的边框不能和它里面的元素的外边距重叠。这就意味着浏览器将会给块级格式化上下文创建隐式的外边距来阻止它和浮动元素的外边距叠加。由于这个原因，当给一个挨着浮动的块级格式化上下文添加负的外边距时将会不起作用（Webkit和IE6在这点上有一个问题——可以看这个测试用例）。</li>
+  <li>块级格式化上下文通常可以包含浮动<br>详见： W3C CSS2.1 - 10.6.7
+  <a
+  href="http://www.w3.org/TR/CSS2/visudet.html#root-height"
+  target="_blank"
+  rel="external">‘Auto’ heights for block formatting context roots</a>
+  </li>
+  </ul>
+  <p>通俗地来说：创建了 BFC的元素就是一个独立的盒子，里面的子元素不会在布局上影响外面的元素，反之亦然，同时BFC任然属于文档中的普通流。<br>overflow:hidden或者auto可以闭合浮动，就是因为父元素创建了新的BFC。</p>
+  <p>IE专有属性hadLayout，没有做过IE 不了解，关于hadLayout来这看：<a
+  href="http://www.smallni.com/haslayout-block-formatting-contexts/"
+  target="_blank"
+  rel="external">hasLayout &amp;&amp; Block Formatting Contexts</a>
+  </p>
+  <hr>
+  <p>参考文献：<br>
+  <a
+  href="http://www.iyunlu.com/view/css-xhtml/55.html"
+  target="_blank"
+  rel="external">[1] 那些年我们一起清除过的浮动</a><br>
+  <a
+  href="http://www.yuiblog.com/blog/2010/05/19/css-101-block-formatting-contexts"
+  target="_blank"
+  rel="external">[2] CSS 101: Block Formatting Contexts</a><br>
+  <a
+  href="http://stackoverflow.com/questions/211383/which-method-of-clearfix-is-best"
+  target="_blank"
+  rel="external">[3] Which method of ‘clearfix’ is best? - Stack Overflow</a>
+  </p>
+
+  </div>
+  <footer class="article-footer clearfix">
+
+  <div class="article-tags">
+
+  <span></span>
+  <a href="/tags/CSS/">CSS</a>
+  <a href="/tags/原理/">原理</a>
+  <a href="/tags/技巧/">技巧</a>
+  <a href="/tags/stackoverflow/">stackoverflow</a>
+  </div>
+
+  <div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/CSS/">CSS</a>
+  </div>
+
+  <div class="article-share" id="share">
+
+  <div
+  data-url="http://snailsky.me/2014/08/20/浮动和它的工作原理？清除浮动的技巧？/"
+  data-title="【CSS】浮动和它的工作原理？清除浮动的技巧？ | Running_snail&#39;s Blog"
+  data-tsina="1649298213"
+  class="share clearfix"></div>
+
+  </div>
+  </footer>
+  </article>
+
+  <nav class="article-nav clearfix">
+
+  <div class="prev">
+  <a href="/2014/08/21/css布局总结与实践/" title="CSS布局总结与实践">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  CSS布局总结与实践</span>
+  </a>
+  </div>
+
+  <div class="next">
+  <a
+  href="/2014/08/18/displaynone-和-visibilityhidden-有何区别？/"
+  title="【CSS】display:none 和 visibility:hidden 有何区别？">
+  <strong>NEXT:</strong><br/>
+  <span>【CSS】display:none 和 visibility:hidden 有何区别？
+  </span>
+  </a>
+  </div>
+
+  </nav>
+
+  <section class="comment">
+  <div class="ds-thread"></div>
+  </section>
+
+  </div>
+  <div class="openaside">
+  <a class="navbutton" href="#" title="显示侧边栏"></a>
+  </div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc">
+  <li class="toc-item toc-level-2">
+  <a class="toc-link" href="#浮动和它的工作原理">
+  <span class="toc-number">1.</span>
+  <span class="toc-text">浮动和它的工作原理</span></a>
+  <ol class="toc-child">
+  <li class="toc-item toc-level-3">
+  <a class="toc-link" href="#浮动布局：">
+  <span class="toc-number">1.1.</span>
+  <span class="toc-text">浮动布局：</span></a>
+  </li>
+  <li class="toc-item toc-level-3">
+  <a class="toc-link" href="#float属性：">
+  <span class="toc-number">1.2.</span>
+  <span class="toc-text">float属性：</span></a>
+  </li>
+  </ol>
+  </li>
+  <li class="toc-item toc-level-2">
+  <a class="toc-link" href="#怎样清除浮动呢？">
+  <span class="toc-number">2.</span>
+  <span class="toc-text">怎样清除浮动呢？</span></a>
+  <ol class="toc-child">
+  <li class="toc-item toc-level-3">
+  <a class="toc-link" href="#闭合浮动的方法：">
+  <span class="toc-number">2.1.</span>
+  <span class="toc-text">闭合浮动的方法：</span></a>
+  <ol class="toc-child">
+  <li class="toc-item toc-level-4">
+  <a class="toc-link" href="#方法一（差）：添加额外标签">
+  <span class="toc-number">2.1.1.</span>
+  <span class="toc-text">方法一（差）：添加额外标签</span></a>
+  </li>
+  <li class="toc-item toc-level-4">
+  <a class="toc-link" href="#方法二（差）：使用br标签及自身html属性">
+  <span class="toc-number">2.1.2.</span>
+  <span class="toc-text">方法二（差）：使用br标签及自身html属性</span></a>
+  </li>
+  <li class="toc-item toc-level-4">
+  <a class="toc-link" href="#方法三（差）：父元素设置overflow属性">
+  <span class="toc-number">2.1.3.</span>
+  <span class="toc-text">方法三（差）：父元素设置overflow属性</span></a>
+  </li>
+  <li class="toc-item toc-level-4">
+  <a class="toc-link" href="#方法四（差）：父元素也设置浮动">
+  <span class="toc-number">2.1.4.</span>
+  <span class="toc-text">方法四（差）：父元素也设置浮动</span></a>
+  </li>
+  <li class="toc-item toc-level-4">
+  <a class="toc-link" href="#方法五（差）：父元素设置display:table">
+  <span class="toc-number">2.1.5.</span>
+  <span class="toc-text">方法五（差）：父元素设置display:table</span></a>
+  </li>
+  <li class="toc-item toc-level-4">
+  <a class="toc-link" href="#方法六（可）：使用:after伪元素">
+  <span class="toc-number">2.1.6.</span>
+  <span class="toc-text">方法六（可）：使用:after伪元素</span></a>
+  </li>
+  </ol>
+  </li>
+  <li class="toc-item toc-level-3">
+  <a class="toc-link" href="#闭合浮动的原理：">
+  <span class="toc-number">2.2.</span>
+  <span class="toc-text">闭合浮动的原理：</span></a>
+  </li>
+  </ol>
+  </li>
+  </ol>
+  </div>
+
+  </body>
+</html>

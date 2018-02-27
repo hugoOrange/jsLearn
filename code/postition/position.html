@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>position解释</title>
+</head>
+<body>
+    <div class="normal">
+        <div class="pos" id="static">static</div>
+    </div>
+    <div class="normal">
+        <div class="pos" id="relative">relative:可以使用left、top属性</div>
+    </div>
+    <div class="normal">
+        <div class="pos" id="absolute">absolute</div>
+    </div>
+    <div class="normal">
+        <div class="pos" id="fixed">fixed</div>
+    </div>
+
+    <style>
+        .normal {
+            width: 200px;
+            display: inline-block;
+            border: 2px solid red;
+        }
+        .pos {
+            width: 100px;
+            height: 100px;
+            border: 1px solid rebeccapurple;
+            left: 10px;
+            top: 20px;
+            opacity: 0.5;
+            text-align: center;
+        }
+        #static {
+            background: yellowgreen;
+            position: static;
+        }
+        #relative {
+            background: yellowgreen;
+            position: relative;
+        }
+        #absolute {
+            background: yellowgreen;
+            position: absolute;
+        }
+        #fixed {
+            background: yellowgreen;
+            position: fixed;
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Form</title>
+</head>
+<body>
+    
+    <div id="StarBuzz">
+        <h2>The Stabuzz Bean Machine</h2>
+
+        <form action="">
+            <label for="beans">Choose your beans:</label>
+            <select name="beans" id="beans">
+                <option value="House Blend">House Blend</option>
+                <option value="Bolivia">Shade Grown Bolivia Supermo</option>
+                <option value="Guatemala">Organic Guatemala</option>
+                <option value="Kenya">Kenya</option>
+            </select>
+
+            <p>Type: </p>
+            <input type="radio" name="beanType" id="wholeBean">
+            <label for="wholeBean">Whole Bean</label>
+
+            <br>
+
+            <input type="radio" name="beanType" id="ground" checked>
+            <label for="ground">Ground</label>
+
+            <br>
+
+            <label for="bags">Number of bags: </label>
+            <input type="number" name="bags" id="bags" min="1" max="10">
+
+            <br>
+
+            <label for="arrive">Must arrive by data: </label>
+            <input type="date" name="arrive" id="arrive">
+
+            <br>
+
+            <p>Extras: </p>
+            <input type="checkbox" name="extras" id="gift" value="gift">
+            <label for="gift">Gift wrap</label>
+
+            <br>
+
+            <input type="checkbox" name="extras" id="catalog" value="catalog">
+            <label for="catalog">Include catalog with order</label>
+
+            <h3>Ship to: </h3>
+            <label for="name">Name: </label>
+            <input type="text" name="name" id="name">
+
+            <br>
+            
+            <label for="address">Address: </label>
+            <input type="text" name="address" id="address">
+
+            <br>
+            
+            <label for="city">City: </label>
+            <input type="text" name="city" id="city">
+
+            <br>
+            
+            <label for="state">State: </label>
+            <input type="text" name="state" id="state">
+
+            <br>
+            
+            <label for="zip">Zip: </label>
+            <input type="text" name="zip" id="zip">
+
+            <br>
+            
+            <label for="python">Phone: </label>
+            <input type="tel" name="phone" id="phone">
+
+            <br>
+
+            <label for="comments">Customer Comments: </label>
+            <textarea name="comments" id="comments" cols="30" rows="10" placeholder="Is it good?"></textarea>
+
+            <input type="submit" value="submit">
+        </form>
+    </div>
+
+    <script>
+        console.log(sum)
+        var sum = function (a, b) {
+            console.log(this);
+            console.log(arguments.callee.caller)
+            return a + b;
+        }
+        var plus = function (a, b) {
+            console.log(this);
+            console.log(sum.caller)
+            return a + b;
+        }
+        var o = { name: "xinshi"};
+        o.sum = sum;
+        sum(1, 2);
+        o.sum(1, 2);
+        plus(1, 2);
+    </script>
+</body>
+</html>

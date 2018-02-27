@@ -1,0 +1,66 @@
+
+body {
+    background: rgb(173, 179, 175);
+}
+
+aside {
+    float: right;
+    position: fixed;
+    right: 0px;
+    width: 300px;
+    background: rgb(252, 255, 253);
+}
+
+article {
+    margin: 0 300px 0 50px;
+    padding: 20px;
+    background: white;
+}
+
+/* list style */
+ul {
+    padding-left: 2em;
+}
+li {
+    list-style: none;
+}
+li a {
+    font-size: 15px;
+    font-weight: normal;
+}
+
+/* link style */
+a {
+    color: black;
+    text-decoration: none;
+}
+
+/* code style */
+pre {
+    font-size: 12px;
+    background: rgb(120, 120, 209);
+    padding: 1em;
+}
+
+/* tool tip */
+.toolTipDialogBox {
+    background: #fff;
+    border: 1px solid #000;
+    border-radius: 8px;
+    font-size: 15px;
+    padding: 0.5em 1em;
+    position: absolute;
+    display: none;
+    max-width: 40em;
+}
+.toolTipDialogBox::before {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 0.5em solid transparent;
+    border-right: 0.5em solid transparent;
+    border-bottom: 0.5em solid black;
+    position: absolute;
+    margin-top: -1em;
+    margin-left: -0.5em;
+}
