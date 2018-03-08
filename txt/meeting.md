@@ -206,3 +206,17 @@ if (window.XMLHttpRequest) {
 ### 9、HTML与XHTML —— 二者有什么区别，你觉得应该使用哪一个并说出理由。
 
 ### 10、JSON —— 作用、用途、设计结构
+
+## 常规问题
+
+#### @import和link标签的区别
+
+`@import`是用来css文件里面导入其他css文件时使用的。无法导入其他类型的文件，而link可以定义其他属性；且对css2.1以下不支持；`@import`需要在执行到该语句时才开始加载，即比link标签延迟加载。
+
+#### 浏览器内核
+
+- Trident(IE内核)，在IE4-IE11版本中使用。IE 从版本 11 开始，初步支持 WebGL 技术。IE8 的 JavaScript 引擎是 Jscript，IE9 开始用 Chakra，这两个版本区别很大，Chakra 无论是速度和标准化方面都很出色。国内很多的双核浏览器的其中一核便是 Trident，美其名曰 “兼容模式”。Window10 发布后，IE 将其内置浏览器命名为 Edge，Edge 最显著的特点就是新内核 EdgeHTML。
+- Gecko(Firefox 内核)，是开源的。
+- Webkit(Safri内核)
+- chromium(chrome前内核)，由`Webkit` fork而来
+- Blink(chrome现在内核)
