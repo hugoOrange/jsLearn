@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+        var readline = () => "6553,1-655,5-100,1011,1012,1111";
+        print = x => console.log(x);
+
+let n = readline().split(",");
+let res = [], i = 0;
+let isA = s => s.match("-") !== null;
+
+n.sort((a, b) => +a.split("-")[0] > +b.split("-")[0]);
+
+for (let i = 0; i < n.length - 1; i++) {
+    if (isA(n[i]) && isA(n[i+1])) {
+        if (+n[i].split("-")[0] <= +n[i+1].split("-")[1]) {
+            res.pop();
+            res.push(`${n[i].split("-")[0]}-${Math.max(+n[i].split("-")[1],+n[i+1].split("-")[1])}`)
+            n[i + 1] =`${n[i].split("-")[0]}-${Math.max(+n[i].split("-")[1],+n[i+1].split("-")[1])}`;
+        } else {
+            res.push(n[i]);
+            if (i === n.length -2) {
+                res.push(n[i+1])
+            }
+        }
+    } else if (isA(n[i]) && !isA(n[i+1])) {
+        if (+n[i].split("-")[1] === +n[i+1] -1) {
+            res.pop()
+            res.push(`${n[i].split("-")[0]}-${n[i+1]}`)
+            n[i+1] = `${n[i].split("-")[0]}-${n[i+1]}`;
+        }　else if (+n[i].split("-")[1] < +n[i+1]) {
+            res.pop()
+            res.push(n[i]);
+            if (i === n.length -2) {
+                res.push(n[i+1])
+            }
+        } else {
+            n[i+1] = n[i]
+            if (i === n.length -2) {
+                res.push(n[i+1])
+            }
+        }
+    } else if (!isA(n[i]) && isA(n[i+1])) {
+        res.push(n[i]);
+        if (i === n.length -2) {
+            res.push(n[i+1])
+        }
+    } else if (!isA(n[i]) && !isA(n[i+1])) {
+        if (n[i] === n[i+1]) {
+            res.push(n[i]);
+        } else if (+n[i] === +n[i+1] - 1) {
+            res.push(`${n[i]}-${n[i+1]}`)
+            n[i+1]=`${n[i]}-${n[i+1]}`
+        } else {
+            res.push(n[i])
+            if (i === n.length -2) {
+                res.push(n[i+1])
+            }
+        }
+    }
+}
+
+
+
+print(res.join(","))
+
+
+
+
+
+
+
+    </script>
+
+    <style>
+
+    </style>
+</body>
+</html>
