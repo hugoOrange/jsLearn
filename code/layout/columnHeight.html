@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>多列等高</title>
+</head>
+<body>
+    <div class="margin-bottom">
+        <ul class="left">
+            <li>a</li>
+            <li>b</li>
+            <li>v</li>
+            <li>v</li>
+        </ul>
+        <ul class="right">
+            <li>a</li>
+            <li>b</li>
+            <li>v</li>
+        </ul>
+    </div>
+
+
+    <style>
+        ul {
+            background: aqua;
+            width: 50px;
+            margin-right: 10px;
+        }
+
+        .margin-bottom {
+            overflow: hidden;
+        }
+        .margin-bottom ul {
+            padding-bottom: 9996px;
+            margin-bottom: -9996px;
+            float: left;
+        }
+    </style>
+</body>
+</html>

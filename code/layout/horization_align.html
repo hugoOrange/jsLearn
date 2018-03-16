@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>horization align</title>
+</head>
+<body>
+    
+
+    <div id="align_1" class="align-content">
+        <div class="align-cell">使用text-align使父元素的子元素居中</div>
+    </div>
+
+
+    <div id="align_2" class="align-content">
+        <div class="align-cell">使用"margin:0 atuo;"使宽度确定块级元素居中</div>
+        <div class="align-cell">没有设定宽度的情况</div>
+    </div>
+
+    <div id="align_3" class="align-content">
+        <div class="align-cell">绝对定位时使用"margin-left:50%"+"transform:translateX(-50%)"偏移</div>
+    </div>
+    
+    <div id="align_4" class="align-content" style="margin-top:4em;">
+        <p>利用浮动和绝对定位的变体，对多元素使用居中；在父元素使用"absolute"和"left:50%"，然后子元素使用"relative" "float:left" "right:50%"居中</p>
+        <p>原理解释：absolute和relative会处于同一文档流中，所以可以让父元素向右偏移再往左偏移回来</p>
+        <p>优点：兼容性强；缺点：父元素没有完全包住子元素，难理解</p>
+        <ul class="align-cell">
+            <li>111111</li>
+            <li>222222</li>
+            <li>333333</li>
+        </ul>
+    </div>
+
+
+    <div id="align_5" class="align-content" style="margin-top:4em;">
+        <p>利用浮动，对多元素使用居中；原理与上面相似，不过这次都是用"relative",在父元素设置"float:left" "position:relative"和"left:50%"，然后子元素使用"relative" "float:left" "right:50%"居中</p>
+        <p>原理解释：通过"relatvie" "float:left"的共同应用，让父元素向右偏移再往左偏移回来</p>
+        <p>优点：兼容性强；缺点：父元素没有完全包住子元素，难理解</p>
+        <ul class="align-cell">
+            <li>111111</li>
+            <li>222222</li>
+            <li>333333</li>
+        </ul>
+    </div>
+    
+    <div id="align_6" class="align-content" style="margin-top:4em;">
+        <div class="align-cell">利用flex进行居中,缺点：兼容性差</div>
+    </div>
+
+    <div id="align_7" class="align-content">
+        <p>利用"width:fit-content" "margin:auto"进行居中。缺点：兼容性差，仅chrome firefox支持</p>
+        <ul class="align-cell">
+            <li>111111</li>
+            <li>222222</li>
+            <li>333333</li>
+        </ul>
+    </div>
+
+    <link rel="stylesheet" href="../css/horization_align.css">
+</body>
+</html>

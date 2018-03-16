@@ -1,4 +1,8 @@
-# 关键点
+## label作用
+
+​	自动聚焦到表单控件
+
+
 
 ## html5
 
@@ -95,7 +99,6 @@
 
 - **在线和离线事件**
 
-
 ### 设备访问
 
 ​	**camera API**， **触控事件**，**地理位置定位**，**检测设备方向**，**指针锁定 API**。
@@ -121,8 +124,6 @@ p {
 
 - **排版**：文本内容溢出(text-overflow)，换行时单词的分段(hyphens)，阴影(text-shadow)，文本装饰线(text-decoration)；以上要注意兼容性
 - **布局**：***multi-column layouts***，用来设置文本格式，可如何分段换行，***flex-box***
-
-
 
 ## H5：离线存储
 
@@ -151,46 +152,4 @@ NETWORK:
 FALLBACK:
 
 ```
-
-
-
-## cookies sessionStorage localStorage
-
-- cookies　是用来标识用户身份的，通常需要加密；并在始终在同源的http请求中携带；允许存储的数据量较小
-- sessionStorage　存储持久化数据，不会在请求中携带，且一般不加密；在浏览器窗口关闭后自动删除
-- localStorage　存储持久化数据，不会在请求中携带，且一般不加密，关闭浏览器也不会自动删除
-
-
-
-## label作用
-
-​	自动聚焦到表单控件
-
-
-
-## 实现多标签页之间的通信
-
-- **websocket**，有点小题大作
-- **localStorage**，localStorage在被修改时会触发事件
-
-```javascript
-window.addEventListener('storage', event => {
-    console.log(event.key, event.newValue);
-})
-```
-
-注意quirks：Safari 在无痕模式下设置localstorge值时会抛出 QuotaExceededError 的异常
-
-
-
-## webSocket如何兼容低浏览器
-
-- Adobe Flash Socket
-- ActiveX HTMLFile (IE)
-- 基于 multipart 编码发送 XHR
-- 基于长轮询的 XHR
-
-
-
-
 
