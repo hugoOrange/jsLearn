@@ -55,4 +55,66 @@ window.addEventListener('storage', event => {
 - 纯js实现 需要求一个点在不在圆上简单算法、获取鼠标坐标等等
 
 
+#### 兼容性问题
 
+- 事件对象
+
+任何一个对象只要触发了事件，都传一个参数（event）
+IE:默认参数  window.event
+非IE：必须传递一个参数
+
+兼容方法：
+IE浏览器下，只要访问全局对象window的event属性即可，忽略该参数，用window.event来读取该event。
+obj.onclick = function(e){e = e || window.event}
+
+- 事件对象中的属性
+
+IE下，even对象有x,y属性，但是没有pageX,pageY属性；
+非IE下,event对象有pageX,pageY属性，但是没有x,y属性
+
+兼容方法：
+使用条件注释法：<!--[if IE]>...event.x...<![end if]-->
+缺点是在IE浏览器下可能会增加额外的HTTP请求数。
+或者：var x = (event.x ? event.x : event.pageX)
+
+- innerHTML、innerText、textContent
+
+IE支持innerHTML、innerText，不支持textContent属性
+其他浏览器三种属性都支持
+
+- DOM2级事件绑定
+  - IE9以下(不包括9)只支持attachEvent,而FF和Chrome只支持addEventListener
+  - IE9以下(不包括9)只支持detachEvent,而FF和Chrome只支持removeEventListener
+
+把这个兼容写法封装成一个函数
+
+```javascript
+function myAddEvent(obj,ev,fn) {
+
+//obj为要绑定事件的元素，ev为要绑定的事件，fn为绑定事件的函数
+
+   if(obj.attachEvent){
+
+     obj.attachEvent("on" + ev,fn);
+
+   }else {
+
+     obj.addEventListener(ev,fn,false);
+
+   }
+}
+```
+
+- 获取页面内所有元素的一个集合
+
+IE：documen.all
+非IE：document.getElementsByTagName("*")
+
+- 获取对象的可视化区域的宽和高，滚动条距离顶端的距离
+
+```javascript
+var w = document.body.clientWidth || document.documentElement.clientWidth;
+var t = document.body.scrollTop || document.documentElement.scrollTop;
+```
+
+- IE下,可以使用获取常规属性的方法来获取自定义属性,也可以使用getAttribute()获取自定义属性;Firefox下,只能使用getAttribute()获取自定义属性。解决方法:统一通过getAttribute()获取自定义属性。

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>全屏滚动</title>
+</head>
+<body>
+    <div id="container">
+        <div id="page1" class="page"></div>
+        <div id="page2" class="page"></div>
+        <div id="page3" class="page"></div>
+        <div id="page4" class="page"></div>
+        <button id="scroll">向上翻页</button>
+    </div>
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #container {
+            display: block;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .page {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            top: 0;
+            position: relative;
+        }
+
+        #page1 {
+            background: #62a04d;
+            z-index: 2;
+        }
+        #page2 { background: #564204; }
+        #page3 { background: #981697; }
+        #page4 { background: #816715; }
+
+        #scroll {
+            position: absolute;
+            width: 100px;
+            height: 30px;
+            background: #fff;
+            border: 1px solid;
+            margin: 0;
+            left: 50%;
+            top: 50%;
+            z-index: 10;
+            cursor: pointer;
+        }
+    </style>
+
+    <script>
+        var c = document.getElementById("container");
+        var cc = [].slice.call(c.childNodes).filter(element => element.tagName === "DIV");
+        document.getElementById("page1").style.position = "absolute";
+        document.getElementById("scroll").addEventListener("click", event => {
+            var i = 0;
+            for (i = 0; i < cc.length - 1; i++) {
+                if (cc[i].style.position === "absolute") {
+                    cc[i].style.position = "relative";
+                    cc[i + 1].style.position = "absolute";
+                    cc[i + 1].style.zIndex = "2";
+                    break;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
