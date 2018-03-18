@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数值转换</title>
+</head>
+<body>
+    <p id="console"></p>
+
+    <script>
+        var p = document.getElementById("console");
+        var print = (str, res) => p.innerText += str + " = " + res + "\n";
+        var tell = (str) => {
+            var s = document.createElement("em");
+            s.innerText = str + "\n";
+            console.log(s);
+            p.appendChild(s);
+        };
+
+        tell("Number");
+        print("Number(\"1.2\")", Number("1.2"));
+        print("Number(\"-1.2\")", Number("-1.2"));
+        print("Number(\"\")", Number(""));
+        print("Number(\"1234red\")", Number("1234red"));
+        print("Number(\"undefined\")", Number("undefined"));
+        print("Number(\"0xDC\")", Number("0xDC"));
+        print("Number(\"0xdc\")", Number("0xdc"));
+        print("Number(\"3e7\")", Number("3e7"));
+
+        tell("parseInt");
+        print("parseInt(\"1.2\")", parseInt("1.2"));
+        print("parseInt(\"-1.2\")", parseInt("-1.2"));
+        print("parseInt(\"\")", parseInt(""));
+        print("parseInt(\"1234red\")", parseInt("1234red"));
+        print("parseInt(\"undefined\")", parseInt("undefined"));
+        print("parseInt(\"0xDC\")", parseInt("0xDC"));
+        print("parseInt(\"0xdc\")", parseInt("0xdc"));
+        print("parseInt(\"AF\", 16)", parseInt("AF", 16));
+        print("parseInt(\"109\", 8)", parseInt("109", 8));
+        print("parseInt(\"3e7\")", parseInt("3e7"));
+
+        tell("parseFloat");
+        print("parseFloat(\"1.2\")", parseFloat("1.2"));
+        print("parseFloat(\"-1.2\")", parseFloat("-1.2"));
+        print("parseFloat(\"\")", parseFloat(""));
+        print("parseFloat(\"1234red\")", parseFloat("1234red"));
+        print("parseFloat(\"undefined\")", parseFloat("undefined"));
+        print("parseFloat(\"0xDC\")", parseFloat("0xDC"));
+        print("parseFloat(\"0xdc\")", parseFloat("0xdc"));
+        print("parseFloat(\"AF\", 16)", parseFloat("AF", 16));
+        print("parseFloat(\"109\", 8)", parseFloat("109", 8));
+        print("parseFloat(\"3e7\")", parseFloat("3e7"));
+
+        tell("+");
+        print("+\"1.2\"", +"1.2");
+        print("+\"-1.2\"", +"-1.2");
+        print("+\"\"", +"");
+        print("+\"1234red\"", +"1234red");
+        print("+\"undefined\"", +"undefined");
+        print("+\"0xDC\"", +"0xDC");
+        print("+\"0xdc\"", +"0xdc");
+        print("+\"AF\"", +"AF");
+        print("+\"109\"", +"109");
+        print("+\"3e7\"", +"3e7");
+    </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>填充div</title>
+</head>
+<body>
+    <section>
+        <div class="wrap margin-wrap ">
+            <div class="box1">box1 负margin</div>
+            <div class="box2">box2 负margin</div>
+        </div>
+    </section>
+
+    <link rel="stylesheet" href="../css/fillDIV.css">
+    转载自：https://www.jianshu.com/p/050e5cfaa671
+    <!--有一个高度自适应的div，里面有两个div，一个高度100px，
+希望另一个填满剩下的高度(外层div自适应于它的父级高度)。-->
+
+方法一、 flex方法
+
+实现原理：该方法主要部分就是使用了flex:1属性来实现box2的自动伸缩
+注意点：注意兼容性
+
+<!--<section>-->
+<!--<div class="wrap flex-wrap ">-->
+<!--<div class="box1 ">box1 flex</div>-->
+<!--<div class="box2 ">box2 flex</div>-->
+<!--</div>-->
+<!--</section>-->
+
+
+
+方法二 、绝对定位方法
+
+实现原理：box2采用absolute 绝对定位后，再使用bottom:0属性，会使得其紧贴其包裹的元素的底部。
+（准确说是其含有position:relative的父级或以上的包裹元素 ）
+注意点：父级元素别忘记使用position:relative，否则将定位至html上
+
+<!--<section>-->
+<!--<div class="wrap position-wrap ">-->
+<!--<div class="box1 ">box1 position</div>-->
+<!--<div class="box2" >box2 position</div>-->
+<!--</div>-->
+<!--</section>-->
+
+方法三、 calc方法
+
+实现原理：就是通过计算结果设置高度
+注意点：注意兼容性
+
+<!--<section>-->
+<!--<div class="wrap calc-wrap ">-->
+<!--<div class="box1">box1 calc</div>-->
+<!--<div class="box2">box2 calc</div>-->
+<!--</div>-->
+<!--</section>-->
+
+
+方法四、 grid方法
+
+实现原理：利用网格布局中的fr单位
+注意点：注意兼容性
+
+<!--<section>-->
+<!--<div class="wrap grid-wrap ">-->
+<!--<div class="box1">box1 grid</div>-->
+<!--<div class="box2">box2 grid</div>-->
+<!--</div>-->
+<!--</section>-->
+
+方法五 、border-box + 绝对定位方法
+
+实现原理：由于父元素被设置成了IE盒模型，且父元素的padding-top与子元素box1的高度是一样的，
+因此绝对定位的子元素box1属性设为top:0时，其自然而然就处于父元素的padding-top区域了。
+（高度相等 正好遮盖padding-top），而非绝对定位的子元素box2的高度设为100%时，
+其高度就是父元素盒模型中的content里的高度（不包含padding及margin值），因此正好也就填充了
+剩余空间了。
+注意点：父元素记得设置position:relative及box-sizing:border-box
+
+<!--<section>-->
+<!--<div class="wrap border-box-wrap ">-->
+<!--<div class="box1">box1 border-box</div>-->
+<!--<div class="box2">box2 border-box</div>-->
+<!--</div>-->
+<!--</section>-->
+
+方法六  border-box + 负margin方法
+
+实现原理：有部分跟方法五有点类似，都是设置父元素为IE盒模型，且其padding-top为100px， 
+非绝对定位的子元素box2高度为100%；负margin-top的子元素box1为100px，导致其会整体上移100px，
+也就正好遮挡了父元素的padding-top部分了。
+注意点：父元素记得设置box-sizing:border-box
+
+作者：该帐号已被查封
+链接：https://www.jianshu.com/p/050e5cfaa671
+來源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+</body>
+</html>

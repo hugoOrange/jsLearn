@@ -6,6 +6,7 @@
 
 
 
+
 ## 实现多标签页之间的通信
 
 - **websocket**，有点小题大作
@@ -90,17 +91,11 @@ IE支持innerHTML、innerText，不支持textContent属性
 
 ```javascript
 function myAddEvent(obj,ev,fn) {
-
 //obj为要绑定事件的元素，ev为要绑定的事件，fn为绑定事件的函数
-
    if(obj.attachEvent){
-
      obj.attachEvent("on" + ev,fn);
-
    }else {
-
      obj.addEventListener(ev,fn,false);
-
    }
 }
 ```
@@ -118,3 +113,248 @@ var t = document.body.scrollTop || document.documentElement.scrollTop;
 ```
 
 - IE下,可以使用获取常规属性的方法来获取自定义属性,也可以使用getAttribute()获取自定义属性;Firefox下,只能使用getAttribute()获取自定义属性。解决方法:统一通过getAttribute()获取自定义属性。
+
+
+
+####js有6中数据类型
+
+6种原型数据类型Boolean null undefined number string **symbol**
+
+以及Object对象
+
+####js的几种创建对象的方法
+
+- 对象字面量
+- 工厂模式
+
+```javascript
+function Person(name) {
+  var obj = new Object();
+  obj.name = name;
+  obj.say = function() {
+    alert(obj.name);
+  }
+  return obj;
+}
+var p = Person("Black");
+// 对象无法识别；方法重复构建，浪费资源
+```
+
+- 构造函数模式
+
+```javascript
+function Person(name) {
+    this.name = name;
+    this.say = function() {
+        return this.name;
+    }
+}
+var p = Person("Black");
+// 
+function PersonVer2(name) {
+    this.name = name;
+    this.say = say;
+}
+function say() {
+    return this.name;
+}
+```
+
+- 原型模式
+
+```javascript
+function Person() {}
+Person.prototype.name = "Black";
+Person.prototype.say = function() {
+  output(obj.name);
+};
+var p = new Person();
+// 能够识别对象
+// 使用对象字面量对原型赋值时容易出错；对属性类型是对象的属性赋值容易出错；没封装
+function PersonVer2() {}
+PersonVer2.prototype = {
+    name: "Black",
+    say: function() {
+      alert(obj.name);
+    };
+};
+var p2= new PersonVer2();
+// 重写原型丢失了constructor
+function PersonVer3() {}
+PersonVer3prototype = {
+    constructor: PersonVer3
+    name: "Black",
+    say: function() {
+      alert(obj.name);
+    };
+};
+var p3= new PersonVer3();
+// 没丢失constructor，还是有原型模式的缺点
+```
+
+- 组合模式
+
+```javascript
+function Person(name) {
+    this.name = name;
+}
+Person.prototype = {
+    constructor: Person,
+    say: function() {
+      alert(obj.name);
+    };
+}
+var p = new Person("Black");
+// 使用最广泛的方式，有些人觉得封装性不好
+function PersonVer2(name) {
+    this.name = name;
+    if (typeof this.say !== "function") {
+        PersonVer2.prototype.say = function() {
+          alert(obj.name);
+        };
+    }
+}
+var p2 = PersonVer2("Black");
+/* var p2S = Personver2("Black");
+ * p2.say();  // 报错
+ * p2S.say(); // 注释上一行，这句是可以执行的
+ */
+// 这里有个问题，就是第一次创建的对象访问say方法时会报错；因为在使用new操作符时是先进行对象的创建再进行原型的赋值，所以这个创建的对象的指针会被覆盖，找不到原来的属性，改进如下：
+function PersonVer3(name) {
+    this.name = name;
+    if (typeof this.say !== "function") {
+        PersonVer2.prototype.say = function() {
+          alert(obj.name);
+        };
+    }
+    return new PersonVer3(name);
+}
+```
+
+- 其他模式，寄生构造函数，稳妥构造函数模式
+- ES5的*create*方法
+
+```javascript
+// Object.create(proto[, propertiesObject])
+o = Object.create(Object.prototype, {
+  // 设置value，foo会成为所创建对象的数据属性
+  foo: { 
+    writable:true,
+    configurable:true,
+    value: "hello" 
+  },
+  // 不设置value，bar会成为所创建对象的访问器属性
+  bar: {
+    configurable: false,
+    get: function() { return 10 },
+    set: function(value) {
+      console.log("Setting `o.bar` to", value);
+    }
+  }
+});
+
+// 创建一个以另一个空对象为原型,且拥有一个属性p的对象
+o = Object.create({}, { p: { value: 42 } })
+
+// 省略了的属性特性默认为false,所以属性p是不可写,不可枚举,不可配置的:
+o.p = 24
+o.p; // 42
+delete o.p // false
+```
+
+- class关键字
+
+这是es6的新特性，类声明和类表达式都执行在严格模式下。一个类定义里面有get和set方法。
+
+```javascript
+class Circle {
+    // constructor方法，一个类里只能有一个constructor方法
+    constructor(r) {
+        this.radius = r;
+    }
+    // get方法
+    get area() { return this.calcArea(); }
+    // 成员方法
+    calcArea() {
+        return Math.PI * this.radius * this.radius;
+    }
+    // 静态方法
+    static calcPerimeter(r) {
+        return 2 * Math.PI * r;
+    }
+}
+
+var c = new Circle(5);
+console.log(c.area); // 78.53981633974483
+console.log(Circle.calcPerimeter(5)); // 31.41592653589793
+var calcArea = c.calcArea;
+calcArea(); // undefined
+```
+
+通过扩展获得新的类
+
+```javascript
+function Animal (name) {
+  constructor() {
+    this.age = 0;
+  }
+  this.name = name;
+}
+Animal.prototype.speak = function () { // 原型扩展
+  console.log(this.name + ' makes a noise.');
+}
+
+// extend关键字继承类
+class Dog extends Animal {
+  constructor() {
+    super(); // 在使用'this'前需要调用super
+  }
+  speak() {
+    super.speak(); // 使用super调用超类
+    console.log(this.name + ' barks.');
+  }
+}
+
+var d = new Dog('Mitzie');
+d.speak();
+```
+
+**Mix-ins**
+
+使用一个超类作为输入的函数和一个继承该超类的子类作为输出
+
+```javascript
+var calculatorMixin = Base => class extends Base {
+    calc() { }
+};
+var randomizerMixin = Base => class extends Base {
+    randomize() { }
+};
+// 使用方法
+class Foo { }
+class Bar extends calculatorMixin(randomize(Foo)) { }
+```
+
+#### js继承
+
+除了上面的extends之外。
+
+原型链继承，
+
+#### 箭头函数
+
+- 不绑定this，它使用封闭执行上下文的this值，通过call或apply调用不影响this值
+- 不绑定arguments，而使用剩余参数
+- 不能使用new操作符
+- 没有prototype属性
+- 不能使用yield关键字
+- 运算符优先级解析规则特殊
+
+#### this对象
+
+this总是指向直接调用者；如果有new关键字，则指向那个new的那个对象。
+
+#### ["1","2","3"].map(parseInt)答案是多少
+
+结果为[1, NaN, NaN]，因为map的参数callbackfn会收到两个参数，一个是value，一个是index，也就是parseInt函数实际上会收到参数`("1", 0)("2", 1)("3", 2)`，也就是返回的结果分别是`1 NaN NaN`
+

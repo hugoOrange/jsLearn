@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>类型检查</title>
+</head>
+<body>
+    
+    <pre id="console"></pre>
+
+    <script>
+        var p = document.getElementById("console");
+        var print = (str, res) => {
+            p.innerText += str + (res === undefined ? "" : ("\nfunction: " + res)) + "\n";
+        };
+        var tell = (str) => {
+            var s = document.createElement("em");
+            s.innerText = "\n" + str + "\n";
+            p.appendChild(s);
+        };
+
+
+        var obj = {
+            attr1: "attribute1",
+            attr2: "attribute2",
+            attr3: "attribute3"
+        }
+        var arr = [0, 2, 3, 6, 7];
+        var func = () => 1;
+        var dom = document.createElement("div");
+        var tDom = document.createTextNode("div");
+
+        var checkGeneral = (v) => Object.prototype.toString.call(v);
+        var checkArray1 = (arr) => Array.isArray(arr);
+        var checkArray2 = (arr) => arr instanceof Array;
+        var checkArray3 = (arr) => Object.prototype.toString.call(arr) === "[object Array]";
+        var checkDOM = (v) => ( typeof HTMLElement === 'object' ) ? v instanceof HTMLElement : v && typeof v === 'object' && v.nodeType === 1 && typeof v.nodeName === 'string';
+
+        tell("check basic type: ");
+        print("checkGeneral(): ", checkGeneral);
+        print("checkGeneral(0): " + checkGeneral(0));
+        print("checkGeneral(true): " + checkGeneral(true));
+        print("checkGeneral(false): " + checkGeneral(false));
+        print("checkGeneral(null): " + checkGeneral(null));
+        print("checkGeneral(undefined): " + checkGeneral(undefined));
+        print("checkGeneral(\"\"): " + checkGeneral(""));
+        print("checkGeneral(\"something\"): " + checkGeneral("something"));
+        print("checkGeneral(obj): " + checkGeneral(obj));
+        print("checkGeneral(arr): " + checkGeneral(arr));
+        print("checkGeneral(func): " + checkGeneral(func));
+
+        tell("check array: ");
+        print("checkArray1(arr): " + checkArray1(arr), checkArray1);
+        print("有局限: checkArray2(arr): " + checkArray2(arr), checkArray2);
+        print("checkArray3(arr): " + checkArray3(arr), checkArray3);
+
+        tell("check dom: ");
+        print("checkDOM(obj): " + checkDOM(obj));
+        print("checkDOM(dom): " + checkDOM(dom));
+        print("checkDOM(tDom): " + checkDOM(tDom), checkDOM);
+
+    </script>
+</body>
+</html>

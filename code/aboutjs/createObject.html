@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>创建对象</title>
+</head>
+<body>
+
+    <style>
+        h3 {
+            margin: 1em 0 0 0;
+        }
+        p, pre, ol, li {
+            margin: 0;
+        }
+    </style>
+
+    <script>
+        var heading = (str) => {
+            let h = document.createElement("h3");
+            h.innerText = str;
+            document.body.appendChild(h);
+        }
+        var print = (str, res) => {
+            let pre = document.createElement("pre");
+            if (typeof res === "object") {
+                pre.innerText += str + " = {\n";
+                for (const key in res) {
+                    if (res.hasOwnProperty(key)) {
+                        pre.innerText += "    " + key + ": " + res[key] + "\n";
+                    }
+                }
+                pre.innerText += "}\n";
+            } else {
+                pre.innerText += str + "(" + typeof res + ") = " + res + "\n";
+            }
+            document.body.appendChild(pre)
+        };
+        var printPrototype = (str, res) => {
+            let pre = document.createElement("pre");
+            if (typeof res === "object") {
+                pre.innerText += str + " = {\n";
+                for (const key in res) {
+                    pre.innerText += "    " + key + ": " + res[key] + "\n";
+                }
+                pre.innerText += "}\n";
+            } else {
+                pre.innerText += str + "(" + typeof res + ") = " + res + "\n";
+            }
+            document.body.appendChild(pre)
+        };
+        var tell = (str) => {
+            var s = document.createElement("p");
+            s.innerText = str + "\n";
+            document.body.appendChild(s);
+        };
+        var list = (title, ...listCell) => {
+            var ul = document.createElement("ol");
+            var li = null;
+            tell(title);
+            for (let i = 0; i < listCell.length; i++) {
+                li = document.createElement("li");
+                li.innerText = listCell[i];
+                ul.appendChild(li);
+            }
+            document.body.appendChild(ul);
+        }
+
+        function factoryPerson() {
+            var obj = new Object();
+            obj.name = "Black";
+            obj.say = function() {
+                output(obj.name);
+            }
+
+            return obj;
+        }
+
+        function constructorPerson() {
+            this.name = "Black";
+            this.say = function() {
+                alert(this.name);
+            }
+        }
+
+        function prototypePersonGive(){
+            function prototypePerson() {}
+            prototypePerson.prototype.name = "Black";
+            prototypePerson.prototype.say = function() {
+                alert(this.name);
+            }
+            prototypePerson.prototype.friends = ["White"];
+
+            window.prototypePerson = prototypePerson;
+        }
+        prototypePersonGive();
+
+        
+
+        heading("工厂模式： ")
+        print(factoryPerson + "\nfactoryPerson()", factoryPerson());
+        list("优点", "完成基本要求");
+        list("缺点", "无法通过constructor识别对象，以为都是来自Object，无法得知来自Person", "每次通过Person创建对象的时候，所有的say方法都是一样的，但是却存储了多次，浪费资源");
+
+        heading("构造函数模式： ");
+        print(constructorPerson + "\nnew constructorPerson()", new constructorPerson());
+        tell("new constructorPerson().say === new constructorPerson().say :  " + (new constructorPerson().say === new constructorPerson().say));
+        list("优点", "通过constructor或者instanceof可以识别对象实例的类别", "可以通过new 关键字来创建对象实例，更像OO语言中创建对象实例");
+        list("缺点", "多个实例的say方法都是实现一样的效果，但是却存储了很多次(两个对象实例的say方法是不同的，因为存放的地址不同）");
+        list("注意", "构造函数模式隐试的在最后返回return this 所以在缺少new的情况下，会将属性和方法添加给全局对象，浏览器端就会添加给window对象",
+            "也可以根据return this 的特性调用call或者apply指定this。这一点在后面的继承有很大帮助");
+
+        heading("原型模式： ");
+        printPrototype(prototypePersonGive + "\nnew prototypePerson()", new prototypePerson());
+        list("优点", "实现方法共享，减少资源浪费", "可以动态的添加原型对象的方法和属性，并直接反映在对象实例上");
+        list("缺点", "由于属性共享，所以出现属性出现引用的时候会出错，如在上面创建的两个对象A、B，如果对B中的friends属性修改的话，A中的friends属性也会同样修改",
+            "因为是在原型上添加，所以一开始会搜索两次", "所有方法均共享，没有各自实例的属性和方法");
+        list("注意", "通过对象字面量修改构造原型时，由于改变了__proto__的地址，所以对已创建的对象来说，通过this访问原来的属性可能会出错");
+    </script>
+</body>
+</html>

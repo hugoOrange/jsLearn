@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Object实例</title>
+</head>
+<body>
+    
+    <pre id="console"></pre>
+
+    <script>
+        var p = document.getElementById("console");
+        var print = (str, res) => {
+            if (typeof res === "object") {
+                p.innerText += str + "(object) = {\n";
+                for (const key in res) {
+                    if (res.hasOwnProperty(key)) {
+                        p.innerText += "     " + key + ": " + res[key] + "\n";
+                    }
+                }
+                p.innerText += "}\n";
+            } else {
+                p.innerText += str + "(" + typeof res + ") = " + res + "\n";
+            }
+        };
+        var tell = (str) => {
+            var s = document.createElement("em");
+            s.innerText = "\n" + str + "\n";
+            p.appendChild(s);
+        };
+
+
+        var objTest = {
+            attr1: "attribute1",
+            attr2: "attribute2",
+            attr3: "attribute3"
+        }
+        var arrayTest = [0, 2, 3, 6, 7];
+        var func1 = () => 1;
+        var func2 = () => { var x = 1; };
+
+        tell("object test: ");
+        print("objTest", objTest);
+        print("objTest.constructor()", objTest.constructor());
+        print("objTest.hasOwnProperty()", objTest.hasOwnProperty());
+        print("objTest.isPrototypeOf()", objTest.isPrototypeOf());
+        print("objTest.propertyIsEnumerable()", objTest.propertyIsEnumerable());
+        print("objTest.toString()", objTest.toString());
+        print("objTest.valueOf()", objTest.valueOf());
+
+        tell("array test: ");
+        print("arrayTest", arrayTest);
+        print("arrayTest.constructor()", arrayTest.constructor());
+        print("arrayTest.hasOwnProperty()", arrayTest.hasOwnProperty());
+        print("arrayTest.isPrototypeOf()", arrayTest.isPrototypeOf());
+        print("arrayTest.propertyIsEnumerable()", arrayTest.propertyIsEnumerable());
+        print("arrayTest.toString()", arrayTest.toString());
+        print("arrayTest.valueOf()", arrayTest.valueOf());
+
+        tell("function with return value test: ");
+        print("func1", func1);
+        print("func1.constructor()", func1.constructor());
+        print("func1.hasOwnProperty()", func1.hasOwnProperty());
+        print("func1.isPrototypeOf()", func1.isPrototypeOf());
+        print("func1.propertyIsEnumerable()", func1.propertyIsEnumerable());
+        print("func1.toString()", func1.toString());
+        print("func1.valueOf()", func1.valueOf());
+
+        tell("function without return value test: ");
+        print("func2", func2);
+        print("func2.constructor()", func2.constructor());
+        print("func2.hasOwnProperty()", func2.hasOwnProperty());
+        print("func2.isPrototypeOf()", func2.isPrototypeOf());
+        print("func2.propertyIsEnumerable()", func2.propertyIsEnumerable());
+        print("func2.toString()", func2.toString());
+        print("func2.valueOf()", func2.valueOf());
+    </script>
+</body>
+</html>
