@@ -335,11 +335,99 @@ class Foo { }
 class Bar extends calculatorMixin(randomize(Foo)) { }
 ```
 
+#### New所致行操作
+
+​	当执行`new Foo(...)`时：
+
+1. 创建一个空对象；
+2. 让`Foo`的`this`指向这个空对象；
+3. 为空对象添加`__proto__`属性，该属性指向`Foo.prototype`；
+4. 返回这个对象就是`new`表达式的结果。
+
 #### js继承
 
-除了上面的extends之外。
+以下假设要继承：
 
-原型链继承，
+```javascript
+function Person(first, last, age, gender, intersts) {
+    this.name = [first, last];
+    this.age = age;
+    this.gender = gender;
+    this.intersts = intersts;
+    this.workTime = 10;
+}
+```
+
+**注意：为了避免构造函数的原型能够正确指回构造函数，每次修改完原型后需要进行以下操作：**
+
+```
+child.prototype = parent;
+child.prototype.constructor = child;
+```
+
+#####构造函数绑定
+
+```javascript
+function Teacher(first, last, age, gender, intersts, subject) {
+    Person.call(this, first, last, age, gender, intersts);
+    this.subject = subject;
+}
+Teacher.prototype = Object.create(Person.prototype);
+Teacher.prototype.constructor = Teacher;
+```
+
+##### 构造函数的原型模式
+
+注意，这里是原型链继承，用`hasOwnProperty()`或者直接打印是看不出来的，用'.'或'[]'还是能找到
+
+```javascript
+function Teacher(subject) { this.subject = subject; }
+Teacher.prototype = new Person();
+Teacher.prototype.constructor = Teacher;
+// 不适合父类构造函数有参数输入时
+
+/* 改进１ -- 直接覆盖prototype */
+Person.prototype.workTime = "8h";
+function Teacher(subject) { this.subject = subject; }
+Teacher.prototype = Person.prototype;
+Teacher.prototype.constructor = Teacher; // 效率高，不会重复创建Person实例
+// 问题：对Teacher.prototype的修改也会引起对Person.prototype的修改
+
+/* 改进２(YUI库的继承) -- 用空对象做中介 */
+var middle = function() {};
+middle.prototype = Person.prototype;
+function Teacher(subject) { this.subject = subject; }
+Teacher.prototype = new middle(); // 空对象不占内存
+Teacher.prototype.constructor = Teacher;
+```
+
+##### 非构造函数的继承
+
+```javascript
+// 道格拉斯继承
+function object(o) {
+    function F() {}
+    F.prototype = o;
+    return new F();
+}
+// 
+function shallowExtend(o, new_value) {
+    var obj = {};
+    for (key in o) {
+        obj[key] = o[key];
+    }
+    
+    obj.new_attri = new_value;
+    return obj;
+}
+// 
+function deepExtend(o, new_value) {
+    var obj = {};
+    for (key in o) {
+    	obj[key] = typeof o[key] === "object" ? JSON.parse(JSON.stringify(o[key])) : obj[key];
+    }
+}
+```
 
 #### 箭头函数
 
@@ -357,4 +445,6 @@ this总是指向直接调用者；如果有new关键字，则指向那个new的�
 #### ["1","2","3"].map(parseInt)答案是多少
 
 结果为[1, NaN, NaN]，因为map的参数callbackfn会收到两个参数，一个是value，一个是index，也就是parseInt函数实际上会收到参数`("1", 0)("2", 1)("3", 2)`，也就是返回的结果分别是`1 NaN NaN`
+
+#### 闭包
 
