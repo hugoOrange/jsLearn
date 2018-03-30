@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>专业盗贼</title>
+</head>
+<body>
+    
+    <script>
+        const rob = (nums) => {
+
+            function f(n) {
+                if (n === -1) {
+                    return 0;
+                } else if (n === 0) {
+                    return nums[0];
+                } else if (n === 1) {
+                    return Math.max(nums[0], nums[1]);
+                } else {
+                    return Math.max(arguments.callee(n - 1), arguments.callee(n - 2) + nums[n]);
+                }
+            }
+            return f(nums.length - 1);
+
+        }
+
+        console.log(rob([1, 2, 4,5, 64,31,64,5]));
+    </script>
+</body>
+</html>

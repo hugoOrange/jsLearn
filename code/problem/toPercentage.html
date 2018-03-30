@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>转换成百分比</title>
+</head>
+<body>
+    
+    <script>
+        const toPercentage = (num) => {
+            var s = Math.round(num * 10000) / 100 + "";
+            if (s.search(/\./) === -1) {
+              s += ".00%";
+            } else {
+              s += new Array(2 - s.split(".")[1].length).fill("0").join("") + "%"
+            }
+            return s;
+        }
+
+        console.log(toPercentage(2.7))
+    </script>
+</body>
+</html>

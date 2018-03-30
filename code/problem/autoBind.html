@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>实例绑定</title>
+</head>
+<body>
+    
+    <script>
+        class Person {
+            constructor (name) {
+                this.name = name
+            }
+            sayHi () {
+                console.log(`I am ${this.name}.`)
+            }
+        }
+
+
+        // const jerry = new Person('Jerry');
+        // jerry.sayHi();
+        // const sayHi = jerry.sayHi;
+        // sayHi(); // => I am Jerry.
+
+        const autoBind = (ToBindClass) => {
+            return  function (...args) {
+                var o = new ToBindClass(...args);
+                return new Proxy(o, {
+                    get: function(obj, prop, val) {
+                        let v = Reflect.get(obj, prop);
+                        if (typeof v === "function") {
+                            return v.bind(o);
+                        } else {
+                            return val;
+                        }
+                    }
+                });
+            };
+        }
+
+        const BoundPerson = autoBind(Person);
+
+
+        const lucy = new BoundPerson('Lucy')
+        const sayHi = lucy.sayHi
+        sayHi() // => I am Lucy.
+    </script>
+</body>
+</html>
