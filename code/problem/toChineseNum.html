@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>把数字转换成中文</title>
+</head>
+<body>
+    <script>
+        const toChineseNum = (num) => {
+
+            const cnMap = ["", "十", "百", "千"];
+            const nMap = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
+            const len = (num + "").length;
+            var numStr = num + "";
+            var chineseStr = "";
+            var trans4Bit = (number) => {
+                let a = 0, resStr = "", isGive = false;
+                for (let i = cnMap.length - 1; i >= 0; i--) {
+                    a = Math.pow(10, i);
+                    if (number / a >= 1) {
+                        n = Math.floor(number / a);
+                        resStr += nMap[n] + cnMap[i];
+                        number -= n * a;
+                        isGive = true;
+                    } else {
+                        if (isGive && number > 0) {
+                            resStr += "零";
+                            isGive = false; 
+                        }
+                    }
+                }
+                return resStr;
+            }
+            if (len > 4) {
+                let more = numStr.slice(0, len - 4);
+                chineseStr += trans4Bit(+more) + "万";
+                numStr = numStr.slice(len - 4);
+                if (numStr[0] === "0") {
+                    chineseStr += "零";
+                }
+            }
+            chineseStr += trans4Bit(+numStr);
+
+            return chineseStr;
+
+        }
+
+        console.log(toChineseNum(92810025));
+    </script>
+</body>
+</html>
