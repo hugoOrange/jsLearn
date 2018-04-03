@@ -1,4 +1,4 @@
-## cookies sessionStorage localStorage
+###cookies sessionStorage localStorage
 
 - cookies　是用来标识用户身份的，通常需要加密；并在始终在同源的http请求中携带；允许存储的数据量较小
 - sessionStorage　存储持久化数据，不会在请求中携带，且一般不加密；在浏览器窗口关闭后自动删除
@@ -7,7 +7,7 @@
 
 
 
-## 实现多标签页之间的通信
+###实现多标签页之间的通信
 
 - **websocket**，有点小题大作
 - **localStorage**，localStorage在被修改时会触发事件
@@ -22,7 +22,7 @@ window.addEventListener('storage', event => {
 
 
 
-## webSocket如何兼容低浏览器
+###webSocket如何兼容低浏览器
 
 - Adobe Flash Socket
 - ActiveX HTMLFile (IE)
@@ -49,14 +49,14 @@ window.addEventListener('storage', event => {
 
 
 
-####如何在页面上实现一个圆形的可点击区域？
+###如何在页面上实现一个圆形的可点击区域？
 
 - map+area或者svg
 - border-radius
 - 纯js实现 需要求一个点在不在圆上简单算法、获取鼠标坐标等等
 
 
-#### 兼容性问题
+### 兼容性问题
 
 - 事件对象
 
@@ -116,13 +116,13 @@ var t = document.body.scrollTop || document.documentElement.scrollTop;
 
 
 
-####js有6中数据类型
+###js有6中数据类型
 
 6种原型数据类型Boolean null undefined number string **symbol**
 
 以及Object对象
 
-####js的几种创建对象的方法
+###js的几种创建对象的方法
 
 - 对象字面量
 - 工厂模式
@@ -335,7 +335,7 @@ class Foo { }
 class Bar extends calculatorMixin(randomize(Foo)) { }
 ```
 
-#### New所致行操作
+### New所致行操作
 
 ​	当执行`new Foo(...)`时：
 
@@ -344,7 +344,7 @@ class Bar extends calculatorMixin(randomize(Foo)) { }
 3. 为空对象添加`__proto__`属性，该属性指向`Foo.prototype`；
 4. 返回这个对象就是`new`表达式的结果。
 
-#### js继承
+### js继承
 
 以下假设要继承：
 
@@ -429,7 +429,7 @@ function deepExtend(o, new_value) {
 }
 ```
 
-#### 箭头函数
+### 箭头函数
 
 - 不绑定this，它使用封闭执行上下文的this值，通过call或apply调用不影响this值
 - 不绑定arguments，而使用剩余参数
@@ -438,17 +438,17 @@ function deepExtend(o, new_value) {
 - 不能使用yield关键字
 - 运算符优先级解析规则特殊
 
-#### this对象
+### this对象
 
 this总是指向直接调用者；如果有new关键字，则指向那个new的那个对象。
 
-#### ["1","2","3"].map(parseInt)答案是多少
+### ["1","2","3"].map(parseInt)答案是多少
 
 结果为[1, NaN, NaN]，因为map的参数callbackfn会收到两个参数，一个是value，一个是index，也就是parseInt函数实际上会收到参数`("1", 0)("2", 1)("3", 2)`，也就是返回的结果分别是`1 NaN NaN`
 
-#### 闭包
+### 闭包
 
-####几种设计模式
+###几种设计模式
 
 MVC模式：分离视图与操作，操作换了个地方
 
