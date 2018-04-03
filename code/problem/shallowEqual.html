@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>深度比较</title>
+</head>
+<body>
+    
+
+    <script>
+        const shallowEqual = (x, y) => {
+            if (typeof x !== typeof y) return false
+            if (typeof x !== 'object') {
+                return Object.is(x, y)
+            } else {
+                if (x === null || y === null) return x === y
+                let keys1 = Object.keys(x), keys2 = Object.keys(y)
+                if (keys1.length !== keys2.length) return false
+                return keys1.every(d => Object.is(x[d], y[d]))
+            }
+        }
+
+        console.log(shallowEqual(+0, -0)); // false
+        console.log(shallowEqual(1, 1)); // true
+        console.log(shallowEqual(1, 2)); // false
+        console.log(shallowEqual('foo', 'foo')); // true
+        console.log(shallowEqual(window, window)); // true
+        console.log(shallowEqual('foo', 'bar')); // false
+        console.log(shallowEqual([], [])); // true
+        console.log(shallowEqual([1, 2, 3], [1, 2, 3])); // true
+        console.log(shallowEqual({ name: 'Jerry' }, { name: 'Jerry' })); // true
+        console.log(shallowEqual({ age: NaN }, { age: NaN })); // true
+        console.log(shallowEqual(null, { age: NaN })); // false
+
+        var a = { name: 'Jerry' }
+        var b = { age: 12 }
+        console.log(shallowEqual({ a, b }, { a, b })); // true
+        console.log(shallowEqual({ a, b }, { a })); // false
+    </script>
+</body>
+</html>
