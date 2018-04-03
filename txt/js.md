@@ -455,3 +455,36 @@ MVC模式：分离视图与操作，操作换了个地方
 MVVM模式：操作与视图进行双向绑定，减少出操作复杂度
 
 重新渲染：如果操作更新视图则对视图重新渲染，Virtual DOM的做法
+
+### BOM
+
+- 窗口的移动、新建和删除，但是往往会受到浏览器的控制--安全问题
+- 超时调用（setTimeout），间歇调用（setInternel)
+- 通过alert()、confirm()和prompt()可以调用系统对话框，还有print()和find()
+
+### 关于JavaScript的event loop
+
+![JavaScript Event Loop](../img/eventLoop.png)
+
+JavaScript中包含一个主线程的任务执行栈和一个事件队列，当主线程的任务执行栈执行完之后就会执行事件队列里面的事件。
+
+除了setTimeout()和setInternel()之外nodejs还提供两个函数[process.nextTick](http://nodejs.org/docs/latest/api/process.html#process_process_nexttick_callback)和[setImmediate](http://nodejs.org/docs/latest/api/timers.html#timers_setimmediate_callback_arg)。
+
+HTML5标准规定了setTimeout()的第二个参数的最小值（最短间隔），不得低于4毫秒，如果低于这个值，就会自动增加。在此之前，老版本的浏览器都将最短间隔设为10毫秒。另外，对于那些DOM的变动（尤其是涉及页面重新渲染的部分），通常不会立即执行，而是每16毫秒执行一次。这时使用requestAnimationFrame()的效果要好于setTimeout()。
+
+一般认为,使用超时调用来模拟间歇调用是一种最佳模式,因为后一个间歇调用可能在前一个间歇调用结束钱启动。
+
+```javascript
+var num = 0, max = 10;
+var end = true, isEnd = false;
+function mySetInternel() {
+    num++;
+    if (num < max && end) {
+        setTimeout(mySetInternel, 6000);
+    } else {
+        isEnd = true;
+    }
+}
+setTimeout(mySetInternel, 6000);
+```
+

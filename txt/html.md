@@ -153,3 +153,41 @@ FALLBACK:
 
 ```
 
+##链接
+
+###href详解
+
+####调用js的时候
+
+```html
+<a href="javascript:void(0);" onclick="js_method()"></a>  
+<a href="javascript:;" onclick="js_method()"></a>  
+<a href="#" onclick="js_method();return false;"></a>  <!-- 不跳转 -->
+```
+
+####为url
+
+```html
+<a href="http://www.baidu.com"></a> <!-- 跳转到相应的url -->
+<a href="./test.doc"></a> <!-- 打开新的标签页 -->
+<a href="./test.doc" download></a> <!-- 下载相应的文件 -->
+<a href="#part1"></a> <!-- 跳转界面的某个部分 -->
+<a href="#"></a>  <!-- 跳转到顶部 -->
+```
+
+####其他
+
+```html
+<a href="mailto:example@sina.com"></a> <!-- 发送邮件 -->
+```
+
+###a详解
+
+```html
+<a target="_blank"></a> <!-- 打开新窗口进入链接文档 -->
+<a target="_self"></a> <!-- 默认，在相同框架中打开链接文档 -->
+<a target="_parent"></a> <!-- 在父框架中打开链接文档 -->
+<a target="_top"></a> <!-- 在整个窗口中打开链接文档 -->
+<!-- 也可以指定特定的框架名来打开链接文档 -->
+```
+
