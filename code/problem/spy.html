@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>间谍</title>
+</head>
+<body>
+    
+    <script>
+        const spy = (fn) => {
+            var calls = [];
+            var spyFn = function(...args) {
+                let res = fn.apply(this, args);
+                spyFn.calls.push({
+                    args: args,
+                    result: res
+                });
+                return res;
+            }
+            spyFn.calls = calls;
+            return spyFn;
+        }
+
+        let america = (a, b) => a + b;
+        america = spy(america);
+        america(1, 2);
+        america(3, 4);
+        console.log(america.calls[0].args); // => [1, 2]
+        console.log(america.calls[0].result); // => 3
+        console.log(america.calls[1].args); // => [3, 4]
+        console.log(america.calls[1].result); // => 7
+
+        let user = {
+            name: 'Jerry',
+            getName () {
+                return this.name
+            }
+        }
+
+        user.getName = spy(user.getName);
+        user.getName(); // => 'Jerry'
+        console.log(user.getName.calls[0].result); // => 'Jerry'
+    </script>
+</body>
+</html>

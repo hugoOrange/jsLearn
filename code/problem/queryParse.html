@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>queryString分析器</title>
+</head>
+<body>
+    
+    <script>
+        const parseQueryString = (urlStr) => {
+
+            // urlStr = urlStr.replace(/\#.*/, "");
+            // const qPart = urlStr.slice(urlStr.search(/\?/) + 1).split("?");
+            // let queryObj = [];
+            // if (qPart.length === 0 || qPart[0].length === urlStr.length) {
+            //     return {};
+            // }
+            // let tmp = null;
+            // let qPartArr = null;
+            // let qObj = {};
+            // for (let i = 0; i < qPart.length; i++) {
+            //     qPartArr = qPart[i].split(/\&|\?/);
+            //     for (let i = 0; i < qPartArr.length; i++) {
+            //         tmp = qPartArr[i].split("=");
+            //         if (tmp[0] + "=" === qPartArr[i]) {
+            //             qObj[tmp[0]] = "";
+            //         } else if (tmp[0] === qPartArr[i]) {
+            //             qObj[tmp[0]] = null;
+            //         } else {
+            //             qObj[tmp[0]] = tmp[1];
+            //         }
+            //     }
+            //     queryObj.push(qObj);
+            //     qObj = {};
+            // }
+
+            // return queryObj.length === 1 ? queryObj[0] : queryObj;
+
+            console.log(urlStr)
+            urlStr = urlStr.replace(/\#.*/, "");
+            const qPart = urlStr.slice(urlStr.lastIndexOf("?") + 1);
+            let queryObj = {};
+            if (qPart.length === urlStr.length) {
+                return queryObj;
+            }
+            const qPartArr = qPart.split(/\&|\?/);
+            let tmp = null;
+            for (let i = 0; i < qPartArr.length; i++) {
+                tmp = qPartArr[i].split("=");
+                if (tmp[0] + "=" === qPartArr[i]) {
+                    queryObj[tmp[0]] = "";
+                } else if (tmp[0] === qPartArr[i]) {
+                    queryObj[tmp[0]] = null;
+                } else {
+                    queryObj[tmp[0]] = tmp[1];
+                }
+            }
+            return queryObj;
+        }
+        
+        console.log(parseQueryString('https://scriptoj.comproblems/?offset=10&limit=100&tag=all?name=lucy'));
+        console.log(parseQueryString('https://scriptoj.com/problems/#?offset=10&limit=100'));
+        console.log(parseQueryString('https://scriptoj.com/problems/?offset=&limit=100#name=jerry'));
+        console.log(parseQueryString('https://scriptoj.com?offset=10&limit=100'));
+        console.log(parseQueryString('https://scriptoj.com/problems?offset=100&limit=10#nice'));
+        console.log(parseQueryString('https://scriptoj.com/problems'));
+    </script>
+</body>
+</html>

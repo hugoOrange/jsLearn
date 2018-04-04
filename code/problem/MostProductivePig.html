@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>最高产的猪</title>
+</head>
+<body>
+    <div id="root">
+        <div class="pig">
+            <div class="pig">
+              <div class="pig">
+                <div class="pig"></div>
+              </div>
+              <div class="pig">
+                <div class="pig"></div>
+              </div>
+              <div class="pig">
+                <div class="pig"></div>
+              </div>
+            </div>
+            <div class="pig">
+              <div class="pig"></div>
+              <div class="pig"></div>
+            </div>
+            <div class="pig">
+              <div class="pig">
+                <div class="pig"></div>
+                <div class="pig"></div>
+                <div class="pig"></div>
+                <div class="pig"></div>
+                <div class="pig"></div>
+              </div>
+            </div>
+          </div>
+    </div>
+
+    <script>
+        const findMostProductivePigChildrenCount = (dom) => {
+
+            var res = [];
+            var childrenQueue = [dom];
+            var pLen = 1;
+            var cLen = 0;
+            var getPigChildren = (parent) => {
+                return [].slice.call(parent.childNodes).filter((v, i) => v.classList && v.classList.contains("pig"));
+            }
+            var inQueue = (inPig) => {
+                inPig.forEach(pig => {
+                    childrenQueue.push(pig);
+                });
+                return inPig.length;
+            }
+
+            do {
+                pLen = childrenQueue.length;
+                for (let i = 0; i < pLen; i++) {
+                    cLen = Math.max(cLen, inQueue(getPigChildren(childrenQueue.shift())));
+                }
+                res.push(cLen);
+                cLen = 0;
+            } while (childrenQueue.length > 0);
+            res.shift();
+
+            return res;
+        }
+
+
+        console.log(findMostProductivePigChildrenCount(document.querySelector("#root")))
+    </script>
+</body>
+</html>

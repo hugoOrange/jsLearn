@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>执行任意表达式</title>
+</head>
+<body>
+    
+
+    <script>
+        const execute = (expression, context) => {
+
+            let expressionArr = expression.split("+");
+            let resStr = "", tmp;
+            var isStr = n => Number.isNaN(Number(n));
+            var executeExpression = (str) => {
+                let i = str.search(/\(/);
+                let j = str.search(/\./);
+                if (i !== -1) {
+                    return context[str.slice(0, i)]();
+                }
+                if (j !== -1) {
+                    return context[str.slice(0, j)][str.slice(j + 1)];
+                }
+                if (i === -1 && j === -1) {
+                    if (isStr(str)) {
+                        return context[str];
+                    } else {
+                        return Number(str);
+                    }
+                }
+            }
+            for (let i = 0; i < expressionArr.length; i++) {
+                if (expressionArr[i].search(/'|"/) === -1) {
+                    tmp = executeExpression(expressionArr[i].replace(/\s/g, ""));
+                    if (typeof tmp === "number" && !isStr(resStr)) {
+                        resStr = Number(resStr) + tmp;
+                    } else {
+                        resStr += tmp;
+                    }
+                } else {
+                    resStr += expressionArr[i].trim().slice(1, this.length -1);
+                }
+            }
+            return resStr + "";
+        }
+
+        console.log(execute(`'My name is ' + name`, { name: 'Jerry' })); // => My name is Jerry
+        console.log(execute('monkeys.length + 1', { monkeys: [1, 2, 3] })); // => 4
+        console.log(execute('user.name + user.age', { user: { name: 'Jerry', age: 12 } })); // => Jerry12
+        console.log(execute('run()', { run: () => 'Good Night' })); // => Good Night
+    </script>
+</body>
+</html>
