@@ -32,7 +32,7 @@ window.addEventListener('storage', event => {
 
 
 
-#### 浏览器内核
+### 浏览器内核
 
 - Trident(IE内核)，在IE4-IE11版本中使用。IE 从版本 11 开始，初步支持 WebGL 技术。IE8 的 JavaScript 引擎是 Jscript，IE9 开始用 Chakra，这两个版本区别很大，Chakra 无论是速度和标准化方面都很出色。国内很多的双核浏览器的其中一核便是 Trident，美其名曰 “兼容模式”。Window10 发布后，IE 将其内置浏览器命名为 Edge，Edge 最显著的特点就是新内核 EdgeHTML。
 - Gecko(Firefox 内核)，是开源的。
@@ -455,3 +455,23 @@ MVC模式：分离视图与操作，操作换了个地方
 MVVM模式：操作与视图进行双向绑定，减少出操作复杂度
 
 重新渲染：如果操作更新视图则对视图重新渲染，Virtual DOM的做法
+
+###`__proto__ `与`prototype`
+
+**注意**：
+
+- `__proto__`不是标准的属性，但大部分浏览器都支持这个属性
+- 每个对象都有`__proto__`属性
+- 只有函数对象才有`prototype`属性
+
+```javascript
+function Person(name) {
+    this.name = name;
+    this.age = 0;
+}
+var friend = new Person("Black");
+friend.__proto__ === Person.prototype // true
+friend.__proto__ === friend.constructor.prototype // true
+```
+
+可以这么理解，`__proto__`属性就是在不知道对象具体的构造函数的原型时候使用的。
