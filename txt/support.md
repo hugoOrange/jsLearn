@@ -17,3 +17,15 @@ if (typeof pageWidth !== "number") {
 }
 ```
 
+### plugin testing
+
+```javascript
+function hasPlugin(pluginName) {
+    var result = hasPlugin(pluginName);
+    if (!result) {
+        result = hasIEPlugin(pluginName);
+    }
+    return result;
+}
+```
+

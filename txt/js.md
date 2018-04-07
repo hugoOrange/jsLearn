@@ -507,3 +507,33 @@ function mySetInternel() {
 setTimeout(mySetInternel, 6000);
 ```
 
+### DOM
+
+- Node类型，有12种，常用的有`Node.ELEMENT_NODE(1)` `Node.TEXT_NODE(3)`两种，检测是否是节点：
+
+```javascript
+if (someNode && someNode.nodeType && someNode.nodeType === 1) { // IE不支持someNode.nodeType === Node.ELEMENT_NODE这种查询方式
+    alert("It is a node.");
+}
+```
+
+- 对NodeList访问，我们得到的节点常常是一个“类数组”，并且这个NodeList是有生命的，实时更新（关系指针）。可以通过`someNode.childNodes[i]`和`someNode.childNodes.item(i)`访问。常常需要转换成数组：
+
+```javascript
+function convertToArray(nodes) {
+    var array = null;
+    try {
+        array = Array.prorotype.slice.call(nodes, 0);
+    } catch (ex) { // IE中nodeList是一个COM对象
+        array = new Array();
+        for (var i = 0; i < nodes.length; i++) {
+            array.push(nodes[i]);
+        }
+    }
+    return array;
+}
+```
+
+- appendChild insertBefore的操作，如果要插入的节点不是新创建的，则会变成节点移动
+- 对于cloneNode，有深复制（参数为true）和浅复制两种。两者都不会复制节点的JavaScript属性（IE有个bug就是会复制事件处理程序）；且后者不会复制子节点
+
