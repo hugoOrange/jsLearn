@@ -82,5 +82,15 @@ function getPagePos(event) {
 // screen position
 event.screenX
 event.screenY
+### plugin testing
+
+```javascript
+function hasPlugin(pluginName) {
+    var result = hasPlugin(pluginName);
+    if (!result) {
+        result = hasIEPlugin(pluginName);
+    }
+    return result;
+}
 ```
 
