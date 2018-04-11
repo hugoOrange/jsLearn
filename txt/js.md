@@ -32,20 +32,15 @@ window.addEventListener('storage', event => {
 
 
 
-#### 浏览器内核
+###浏览器内核
 
-- Trident(IE内核)，在IE4-IE11版本中使用。IE 从版本 11 开始，初步支持 WebGL 技术。IE8 的 JavaScript 引擎是 Jscript，IE9 开始用 Chakra，这两个版本区别很大，Chakra 无论是速度和标准化方面都很出色。国内很多的双核浏览器的其中一核便是 Trident，美其名曰 “兼容模式”。Window10 发布后，IE 将其内置浏览器命名为 Edge，Edge 最显著的特点就是新内核 EdgeHTML。
-- Gecko(Firefox 内核)，是开源的。
-- Webkit(Safri内核)
-- chromium(chrome前内核)，由`Webkit` fork而来
-- Blink(chrome现在内核)
+- Trident -- JScript | chakra(ie9+) (IE内核) 在IE4-IE11版本中使用。IE 从版本 11 开始，初步支持 WebGL 技术。IE8 的 JavaScript 引擎是 Jscript，IE9 开始用 Chakra，这两个版本区别很大，Chakra 无论是速度和标准化方面都很出色。国内很多的双核浏览器的其中一核便是 Trident，美其名曰 “兼容模式”。Window10 发布后，IE 将其内置浏览器命名为 Edge，Edge 最显著的特点就是新内核 EdgeHTML。
+- EdgeHTML -- Chakra(Edge内核)
+- Gecko -- SpiderMonkey (Firefox 内核)，是开源的。
+- Webkit -- JavascirptCore (Safri内核)
+- chromium (chrome前内核)，由`Webkit` fork而来
+- Blink -- V8 (chrome现在内核)
 
-
-
-###页面可见性（Page Visibility API）
-
-- 通过 visibilityState 的值检测页面当前是否可见，以及打开网页的时间等
-- 在页面被切换到其他后台进程的时候，自动暂停音乐或视频的播放；
 
 
 
@@ -54,6 +49,8 @@ window.addEventListener('storage', event => {
 - map+area或者svg
 - border-radius
 - 纯js实现 需要求一个点在不在圆上简单算法、获取鼠标坐标等等
+
+
 
 
 ### 兼容性问题
@@ -116,13 +113,101 @@ var t = document.body.scrollTop || document.documentElement.scrollTop;
 
 
 
+
 ###js有6中数据类型
 
 6种原型数据类型Boolean null undefined number string **symbol**
 
 以及Object对象
 
-###js的几种创建对象的方法
+
+
+###箭头函数
+
+- 不绑定this，它使用封闭执行上下文的this值，通过call或apply调用不影响this值
+- 不绑定arguments，而使用剩余参数
+- 不能使用new操作符
+- 没有prototype属性
+- 不能使用yield关键字
+- 运算符优先级解析规则特殊
+
+
+
+### ["1","2","3"].map(parseInt)答案是多少
+
+结果为[1, NaN, NaN]，因为map的参数callbackfn会收到两个参数，一个是value，一个是index，也就是parseInt函数实际上会收到参数`("1", 0)("2", 1)("3", 2)`，也就是返回的结果分别是`1 NaN NaN`
+
+
+
+### 闭包
+
+
+
+###几种设计模式
+
+MVC模式：分离视图与操作，操作换了个地方
+
+MVVM模式：操作与视图进行双向绑定，减少出操作复杂度
+
+重新渲染：如果操作更新视图则对视图重新渲染，Virtual DOM的做法
+
+
+
+### BOM
+
+- 窗口的移动、新建和删除，但是往往会受到浏览器的控制--安全问题
+- 超时调用（setTimeout），间歇调用（setInternel)
+- 通过alert()、confirm()和prompt()可以调用系统对话框，还有print()和find()
+
+
+
+### 为什么JavaScript使用单线程
+
+和历史有关。不想让浏览器变得太复杂，因为多线程需要共享资源、且有可能修改彼此的运行结果，对于一种网页脚a本语言来说，这就太复杂了。
+
+
+
+### 强制类型转换
+
+```JavaScript
+// number to string:
+number + "";
+// string to number:
++string;
+-string;
+// number to boolean:
+!!number;
+```
+
+
+
+##有关css操作
+
+### 滚动
+
+HTML5之前并没有与页面滚动相应的API，现在有`scrollIntoView()`可以使用。
+
+也可以使用element的`scrollTop`属性进行设置
+
+### 偏移量
+
+- offsetWidth\offsetHeight\offsetTop\offsetLeft 表示元素所占区域的大小及偏移，包括边框，内边距以及滚动条
+- clientWidth\clientHeight\clientTop\clientLeft 表示客户区所占区域的大小及偏移，包括内边距，不包括边框和滚动条
+- scrollWidth\scrollHeight\scrollTop\scrollLeft 表示滚动区域的宽高，隐藏在滚动区域的大小
+
+因为浏览器对client和scroll的差异处理，获取元素全部大小`Math.max(element.scrollHeight, element.clientHeight)`......
+
+### js设置css
+
+- 通过`element.style.attribute`修改，attribute必须采用**驼峰书写法**，必须加上**正确的单位**
+- 通过`element.style.cssText`修改，这个属性包含全部的css属性，修改时会重写所有CSS属性，且读取不一定正确
+- 通过`element.style.getPropertyValue` `element.style.setProperty`进行读取或修改，缺点和上面的一样
+
+
+
+## js对象
+
+### js的几种创建对象的方法
 
 - 对象字面量
 - 工厂模式
@@ -365,7 +450,7 @@ child.prototype = parent;
 child.prototype.constructor = child;
 ```
 
-#####构造函数绑定
+##### 构造函数绑定
 
 ```javascript
 function Teacher(first, last, age, gender, intersts, subject) {
@@ -429,42 +514,22 @@ function deepExtend(o, new_value) {
 }
 ```
 
-### 箭头函数
-
-- 不绑定this，它使用封闭执行上下文的this值，通过call或apply调用不影响this值
-- 不绑定arguments，而使用剩余参数
-- 不能使用new操作符
-- 没有prototype属性
-- 不能使用yield关键字
-- 运算符优先级解析规则特殊
-
 ### this对象
 
 this总是指向直接调用者；如果有new关键字，则指向那个new的那个对象。
 
-### ["1","2","3"].map(parseInt)答案是多少
 
-结果为[1, NaN, NaN]，因为map的参数callbackfn会收到两个参数，一个是value，一个是index，也就是parseInt函数实际上会收到参数`("1", 0)("2", 1)("3", 2)`，也就是返回的结果分别是`1 NaN NaN`
 
-### 闭包
+##js事件
 
-###几种设计模式
+### 页面可见性（Page Visibility API）
 
-MVC模式：分离视图与操作，操作换了个地方
-
-MVVM模式：操作与视图进行双向绑定，减少出操作复杂度
-
-重新渲染：如果操作更新视图则对视图重新渲染，Virtual DOM的做法
-
-### BOM
-
-- 窗口的移动、新建和删除，但是往往会受到浏览器的控制--安全问题
-- 超时调用（setTimeout），间歇调用（setInternel)
-- 通过alert()、confirm()和prompt()可以调用系统对话框，还有print()和find()
+- 通过 visibilityState 的值检测页面当前是否可见，以及打开网页的时间等
+- 在页面被切换到其他后台进程的时候，自动暂停音乐或视频的播放；
 
 ### 关于JavaScript的event loop
 
-![JavaScript Event Loop](../img/eventLoop.png)
+![JavaScript Event Loop](/home/haohao/Documents/code/jsLearn/img/eventLoop.png)
 
 JavaScript中包含一个主线程的任务执行栈和一个事件队列，当主线程的任务执行栈执行完之后就会执行事件队列里面的事件。
 
@@ -486,5 +551,51 @@ function mySetInternel() {
     }
 }
 setTimeout(mySetInternel, 6000);
+```
+
+### 事件流
+
+- 事件冒泡：事件由具体到较为不具体的节点
+
+
+- 事件捕获：事件由较为不具体到具体的节点
+
+我们使用的`addEventListener`的第3个参数就是设置是捕获时触发(true)还是冒泡时触发(false)，一般是冒泡时触发，因为有些浏览器只支持冒泡事件(如IE)
+
+```javascript
+// prevent event bubbling or catching
+event.stopPropagation()
+event.cancelBubble = true // IE
+// prevent event default operation
+event.preventDefault()
+event.returnValue = false // IE
+```
+
+### load事件
+
+可以用来实现动态加载js文件，但是IE8及更早版本不支持`<script>`的load事件。
+
+```javascript
+window.addEventListener("load", function() {
+	var script = document.createElement("script");
+    script.src = "otherJs.js";
+    document.body.appendChild(script);
+});
+```
+
+###焦点事件
+
+- focus与focusin事件，前者都支持，但不冒泡，后者冒泡，但有些不支持
+- blur与focusout事件，前者都支持，但不冒泡，后者冒泡，但有些不支持
+
+### 鼠标按键事件
+
+```javascript
+element.addEventListener("click", function (event) {
+    if (event.shiftKey) {}
+    if (event.ctrlKey) {}
+    if (event.altKey) {}
+    if (event.metaKey) {}
+});
 ```
 

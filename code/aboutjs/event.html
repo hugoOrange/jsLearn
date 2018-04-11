@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Click</title>
+</head>
+<body>
+    <div id="click1"></div>
+    
+    <script>
+        // prove that "Enter" key can trigger click event
+        document.getElementById("click1").addEventListener("click", event => {
+            alert("You click!");
+        }, false);
+    </script>
+
+    <style>
+        #click1 {
+            width: 100px;
+            height: 100px;
+            background: blue;
+        }
+    </style>
+</body>
+</html>

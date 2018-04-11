@@ -191,3 +191,26 @@ FALLBACK:
 <!-- 也可以指定特定的框架名来打开链接文档 -->
 ```
 
+##元素节点
+
+- 常常出现的`#text`节点是因为在html文档中出现的空白字符：
+
+```html
+<!-- 有空白字符 -->
+<ul>
+    <li></li>
+    <li></li>
+</ul>
+<!-- 无空白字符 -->
+<ul><li></li><li></li></ul>
+```
+
+```javascript
+someNode.firstElementChild
+// firstChild的元素版，不会出现#text节点
+/* lastChild & lastElementChild */
+/* previousSibling & previousElementSibling */
+/* nextSibling & nextElementSibling */
+```
+
+- ​
