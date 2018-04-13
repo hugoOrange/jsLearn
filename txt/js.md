@@ -32,11 +32,7 @@ window.addEventListener('storage', event => {
 
 
 
-<<<<<<< HEAD
-###浏览器内核
-=======
 ### 浏览器内核
->>>>>>> ebc023f2495612cac0d117291b15b16844d3c0e4
 
 - Trident -- JScript | chakra(ie9+) (IE内核) 在IE4-IE11版本中使用。IE 从版本 11 开始，初步支持 WebGL 技术。IE8 的 JavaScript 引擎是 Jscript，IE9 开始用 Chakra，这两个版本区别很大，Chakra 无论是速度和标准化方面都很出色。国内很多的双核浏览器的其中一核便是 Trident，美其名曰 “兼容模式”。Window10 发布后，IE 将其内置浏览器命名为 Edge，Edge 最显著的特点就是新内核 EdgeHTML。
 - EdgeHTML -- Chakra(Edge内核)
@@ -522,17 +518,7 @@ function deepExtend(o, new_value) {
 
 this总是指向直接调用者；如果有new关键字，则指向那个new的那个对象。
 
-
-
-##js事件
-
-### 页面可见性（Page Visibility API）
-
-<<<<<<< HEAD
-- 通过 visibilityState 的值检测页面当前是否可见，以及打开网页的时间等
-- 在页面被切换到其他后台进程的时候，自动暂停音乐或视频的播放；
-=======
-###`__proto__ `与`prototype`
+### `__proto__ `与`prototype`
 
 **注意**：
 
@@ -551,12 +537,24 @@ friend.__proto__ === friend.constructor.prototype // true
 ```
 
 可以这么理解，`__proto__`属性就是在不知道对象具体的构造函数的原型时候使用的。
+
+
+
+### 页面可见性（Page Visibility API）
+
+- 通过 visibilityState 的值检测页面当前是否可见，以及打开网页的时间等
+- 在页面被切换到其他后台进程的时候，自动暂停音乐或视频的播放；
+
 ### BOM
 
 - 窗口的移动、新建和删除，但是往往会受到浏览器的控制--安全问题
 - 超时调用（setTimeout），间歇调用（setInternel)
 - 通过alert()、confirm()和prompt()可以调用系统对话框，还有print()和find()
->>>>>>> ebc023f2495612cac0d117291b15b16844d3c0e4
+
+
+## js事件
+
+###使用innerHTML创建新元素后里面已有的事件会被清空
 
 ### 关于JavaScript的event loop
 

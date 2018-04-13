@@ -82,6 +82,8 @@ function getPagePos(event) {
 // screen position
 event.screenX
 event.screenY
+```
+
 ### plugin testing
 
 ```javascript
@@ -93,4 +95,3 @@ function hasPlugin(pluginName) {
     return result;
 }
 ```
-
