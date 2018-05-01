@@ -627,7 +627,25 @@ element.addEventListener("click", function (event) {
     if (event.metaKey) {}
 });
 ```
-### DOM
+### 键盘按键事件
+
+主要有三个事件：`keydown` `keypress` `keyup`。
+
+其中`keypress`事件只能监测字符键，`keydown`时间能监测任意键。并且两者都是按住不放就会一直触发。
+
+### 变动事件
+
+用来监听节点变化的事件。除了IE8及更早版本不支持变动事件，大部分浏览器支持。主要有删除节点、插入节点事件。
+
+###DOM3级新事件
+
+大多数仍不支持，谨慎使用。
+
+textInput事件，复合事件。
+
+
+
+##DOM
 
 - Node类型，有12种，常用的有`Node.ELEMENT_NODE(1)` `Node.TEXT_NODE(3)`两种，检测是否是节点：
 

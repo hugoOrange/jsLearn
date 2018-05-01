@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+
+
+    <script>
+        var child = ["index.html", "index.css", "index.js", "app.js"];
+        var ulnode = document.getElementById("root");
+        var linode = null;
+
+        for (let i = 0; i < child.length; i++) {
+            ulnode.innerHTML += '<li><a> <span>F:</span><span class="a_inner_color">' + child[i] + '</span></a ></li>';
+        }
+        for (let j = 0; j < child.length; j++) {
+            linode = ulnode.getElementsByTagName("li")[j];
+            linode.addEventListener("click", function(event) {
+                console.log(event.target);
+                // event.stopPropagation();
+            }, false);
+        }
+    </script>
+
+    <style>
+        li {
+            background: #54d1a6;
+            margin: 10px;
+            cursor: pointer;
+        }
+    </style>
+</body>
+</html>

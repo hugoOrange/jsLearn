@@ -7,29 +7,21 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="root"></div>
+    <input type="text" id="keydown" placeholder="keydown">
+    <input type="text" id="keypress_keyCode" placeholder="keypress_keyCode">
+    <input type="text" id="keypress_charCode" placeholder="keypress_charCode">
+    <input type="text" id="keyup" placeholder="keyup">
 
 
     <script>
-        var child = ["index.html", "index.css", "index.js", "app.js"];
-        var ulnode = document.getElementById("root");
-        var linode = null;
-
-        for (let i = 0; i < child.length; i++) {
-            ulnode.innerHTML += '<li><a> <span>F:</span><span class="a_inner_color">' + child[i] + '</span></a ></li>';
-        // }
-        // for (let j = 0; j < child.length; j++) {
-            linode = ulnode.getElementsByTagName("li")[i];
-            console.log(linode);
-            linode.addEventListener("click", function(event) {
-                console.log(event.target);
-                // event.stopPropagation();
-            }, false);
-        }
+        document.getElementById("keydown").addEventListener("keydown", event => console.log(event.keyCode));
+        document.getElementById("keypress_keyCode").addEventListener("keypress", event => console.log(event.keyCode));
+        document.getElementById("keypress_charCode").addEventListener("keypress", event => console.log(event.charCode));
+        document.getElementById("keyup").addEventListener("keyup", event => console.log(event.keyCode));
     </script>
 
     <style>
-        li {
+        input {
             background: #54d1a6;
             margin: 10px;
             cursor: pointer;
