@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>多列登高2</title>
+</head>
+<body>
+    
+        <div id="container3">
+            <div id="container2">
+                    <div id="container1">
+                            <div id="col1">Column 1</div>
+                            <div id="col2">Column 2</div>
+                            <div id="col3">Column 3</div>
+                    </div>
+            </div>
+        </div>
+
+
+        <style>
+            #container3 {
+                float: left;
+                width: 100%;
+                background: green;/**/
+                overflow: hidden;
+                position: relative;
+            }
+            #container2 {
+                float: left;
+                width: 100%;
+                background: yellow;
+                position: relative;
+                right: 30%;/*大小等于col3的宽度*/
+            }
+            #container1 {
+                float: left;
+                width: 100%;
+                background: orange;
+                position: relative;
+                right: 40%;/*大小等于col2的宽度*/
+            }
+            #col1 {
+                float:left;
+                width:26%;/*增加了2%的padding，所以宽度减少4%*/
+                position: relative;
+                left: 72%;/*距左边呀增加2%就成72%*/
+                overflow: hidden;
+            }
+            #col2 {
+                float:left;
+                width:36%;/*增加了2%的padding，所以宽度减少4%*/
+                position: relative;
+                left: 76%;/*距左边有三个padding为2%,所以距离变成76%*/
+                overflow: hidden;
+            }
+            #col3 {
+                float:left;
+                width:26%;/*增加了2%的padding，所以宽度减少4%*/
+                position: relative;
+                left: 80%;/*距左边5个padding为2%，所以距离变成80%*/
+                overflow: hidden;
+            }
+            作权归作者所有。
+        </style>
+</body>
+</html>

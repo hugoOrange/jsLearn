@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>快排</title>
+</head>
+<body>
+    <pre id="array"></pre>
+
+    <pre id="result"></pre>
+
+    <script>
+        var showArr = (arr) => {
+            document.querySelector("#array").innerText += arr.toString() + "\n";
+        }
+
+
+        var array = [31, 414, 65, 41, 45, 55, 11];
+        var reco = 0, end = 0;
+        showArr(array);
+        
+        function swap(arr, i, j) {
+            let tmp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = tmp;
+        }
+
+        function pushBehind(arr, )
+
+        // 分片
+        // 比较
+        function quickSort(arr, start, len) {
+            if (len === 2) {
+                if (arr[start] > arr[start + 1]) {
+                    swap(arr, start, start + 1);
+                }
+            } else if (len > 2) {
+                reco = start;
+                end = start + len;
+                console.log(arr)
+                for (let i = start + 1; i < end;) {
+                    if (arr[reco] > arr[i]) {
+                        
+                    } else {
+                        reco += 1;
+                    }
+                }
+                console.log(arr)
+                quickSort(arr, start, reco - start);
+                quickSort(arr, reco + 1, start + len - reco - 1);
+            }
+        }
+
+        quickSort(array, 0, array.length);
+        showArr(array);
+    </script>
+</body>
+</html>

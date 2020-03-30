@@ -7,33 +7,120 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="root"></div>
-
 
     <script>
-        var child = ["index.html", "index.css", "index.js", "app.js"];
-        var ulnode = document.getElementById("root");
-        var linode = null;
+//         var c = 
+// `def funcParaChange1_0(para1, para2):
+//     while True:
+//     kernel.paraMap((para1, para2), (0, 0), "1_0")
+//     # use above parameter to adjust function
+    
+// kernel.showTxt("Hello World", 1)`;
 
-        for (let i = 0; i < child.length; i++) {
-            ulnode.innerHTML += '<li><a> <span>F:</span><span class="a_inner_color">' + child[i] + '</span></a ></li>';
-        // }
-        // for (let j = 0; j < child.length; j++) {
-            linode = ulnode.getElementsByTagName("li")[i];
-            console.log(linode);
-            linode.addEventListener("click", function(event) {
-                console.log(event.target);
-                // event.stopPropagation();
-            }, false);
+//         var needResultText = 
+// `
+// def funcParaChange1_1(para1, para2):
+//     paraReceiver = kernel.getConnectIdentitier()
+//     funcId = "1_1"
+//     isNeedChangePara = False
+//     paraChangeInfo = ""
+//     while True:
+//         infoFromParaChange = paraReceiver.recv(NOBLOCK)
+//         if infoFromParaChange == funcId:
+//             isNeedChangePara = True
+//             continue
+//         if isNeedChangePara:
+//             isNeedChangePara = False
+//             paraChangeInfo = json.loads(infoFromParaChange)
+//             infoFromParaChange = ""
+//         try
+//             para1, para2 = kernel.paraMap([para1, para2], paraChangeInfo)
+//         except Exception as error:
+//             print(error)
+// `;
+//         console.log(c)
+//         console.log(needResultText)
+
+        function genNSpace(n) {
+            if (n > 20) {
+                throw error("Too long space prefix");
+            }
+            let spaceStr = "                    ";
+            return spaceStr.slice(0, n);
         }
+
+        function mapFunc(codeText) {
+            // var codeInfo = codeText.match(/(\s*def funcParaChange\d*_\d*)\((\w*(,\s*)?)*\):\s*while True:\s*kernel\.paraMap\(\((\w*,\s*)*\w*\),\s*\(([+-]?\d*(\.\d*)?(,\s*)?)*\),\s*"\d*_\d*"\)/)[0];
+            codeInfo = codeText;
+            var spacePrefixLen = codeInfo.match(/\S/).index;
+            var spacePerLen = codeInfo.match(/\:\s*\S/)[0].length - 3 - spacePrefixLen;
+
+            var codeInfo = codeInfo.match(/kernel\.paraMap\(\(.*/)[0];
+            codeInfo = codeInfo.slice(16, codeInfo.length - 2).split("\"")
+            var paraName = [];
+            var paraOffset = [];
+            var funcId = codeInfo[1];
+
+            codeInfo = codeInfo[0].split(")");
+            paraName = codeInfo[0].split(",").map(s => s.trim());
+            paraOffset = codeInfo[1].split(",").map(s => s.trim());
+            paraOffset.shift();
+            paraOffset[0] = paraOffset[0].slice(1);
+
+            var l1 = genNSpace(spacePrefixLen),
+                l2 = genNSpace(spacePrefixLen + spacePerLen),
+                l3 = genNSpace(spacePrefixLen + spacePerLen * 2),
+                l4 = genNSpace(spacePrefixLen + spacePerLen * 3),
+                l5 = genNSpace(spacePrefixLen + spacePerLen * 4);
+            var paraStr = paraName.join(",");
+            var bparaStr = "b" + paraName.join(",b");
+            var templateCode = l1 + `def funcParaChange${funcId}(${paraStr}):`
+                + "\n" + l2 + "paraReceiver=kernel.getConnectIdentitier()"
+                + "\n" + l2 + "funcId=\"" + funcId + "\""
+                + "\n" + l2 + "isNeedChangePara=False"
+                + "\n" + l2 + "paraChangeInfo=\"\""
+                + "\n" + l2 + bparaStr + "=" + paraStr
+                + "\n" + l2 + "while True:"
+                + "\n" + l3 + "infoFromParaChange=paraReceiver.recv(NOBLOCK)"
+                + "\n" + l3 + "if infoFromParaChange == funcId:"
+                + "\n" + l4 + "isNeedChangePara=True"
+                + "\n" + l4 + "continue"
+                + "\n" + l3 + "if isNeedChangePara:\""
+                + "\n" + l4 + "isNeedChangePara = False"
+                + "\n" + l4 + "paraChangeInfo = json.loads(infoFromParaChange)"
+                + "\n" + l4 + "infoFromParaChange = \"\""
+                + "\n" + l4 + "try"
+                + "\n" + l5 + `${paraStr} = kernel.paraMap([${bparaStr}], paraChangeInfo)`
+                + "\n" + l4 + "except Exception as error:"
+                + "\n" + l5 + "print(error);";
+            return templateCode;
+        }
+
+//         console.log(mapFunc(c))
+
+
+
+        var c2 = 
+`def funcParaChange1_0(para1, para2):
+    while True:
+    kernel.paraMap((para1, para2), (0, 0), "1_0")
+    # use above parameter to adjust function
+    
+def funcParaChange1_1(para1, para2, para3):
+    while True:
+    kernel.paraMap((para1, para2, para3), (0.2, 10), "1_1")
+    # use above parameter to adjust function
+    
+kernel.showTxt("Hello World", 1)`;
+
+        function mapFunc2(codeText) {
+            var codeInfo = codeText.replace(/(\s*def funcParaChange\d*_\d*)\((\w*(,\s*)?)*\):\s*while True:\s*kernel\.paraMap\(\((\w*,\s*)*\w*\),\s*\(([+-]?\d*(\.\d*)?(,\s*)?)*\),\s*"\d*_\d*"\)/g,
+            (str) => "\n" + mapFunc(str));
+            return codeInfo;
+        }
+        
+        console.log(mapFunc2(c2));
+        
     </script>
-
-    <style>
-        li {
-            background: #54d1a6;
-            margin: 10px;
-            cursor: pointer;
-        }
-    </style>
 </body>
 </html>
