@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Different Height</title>
+</head>
+<body>
+    <!-- 不同的height作用 
+        1. 绝对定位的元素的高度计算是根据父元素的 border-box 进行计算的
+        2. 非绝对定位的元素的高度计算是根据父元素的 content-box 进行计算的
+    -->
+
+    <style>
+        .outside {
+            width: 200px;
+            height: 100px;
+            padding: 10px;
+            /* border: 6px solid blue; */
+            margin: 20px;
+            background: red;
+        }
+        .inside {
+            width: 100%;
+            height: 100%;
+            background-color: yellow;
+        }
+        .absolute {
+            position: relative;
+        }
+        .absolute .inside {
+            position: absolute;
+        }
+    </style>
+
+    <div class="outside">
+        <div class="inside"></div>
+    </div>
+    
+    <div class="outside absolute">
+        <div class="inside"></div>
+    </div>
+</body>
+</html>

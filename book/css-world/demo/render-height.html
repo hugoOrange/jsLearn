@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Height Render</title>
+</head>
+<body>
+    <style>
+        /* html, body {
+            height: 100%;
+        } */
+        .outside {
+            display: inline-block;
+            height: 100%;
+            white-space: nowrap;
+            background: red;
+        }
+        .img {
+        }
+        .txt {
+            display: inline-block;
+            height: 100%;
+            background: green;
+            color: white;
+            margin: 0;
+            vertical-align: bottom;
+        }
+    </style>
+
+    <!--
+        高度渲染顺序，
+        1. 先解析外部DOM元素(.outside)，渲染其高度（图片高度）
+        [根据W3C规则，此时的高度计算为(.outside)的父级的高度auto，无法计算]
+        2. 解析内部元素(.txt)，渲染其高度
+        [根据规则，此时的高度计算为(.outside)的高度auto，无法计算]
+        {当然，如果最外层的高度是有的话，则(.outside)(.txt)的高度均可以计算}
+    -->
+    
+    <div class="outside">
+        <img class="img" src="../img.jpg" alt="">
+        <span class="txt">这是一段文字</span>
+    </div>
+</body>
+</html>

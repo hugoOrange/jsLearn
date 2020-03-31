@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clear Float</title>
+</head>
+<body>
+    <!-- 清除浮动 -->
+    
+    <style>
+        .line1 {
+            position: absolute;
+            top: 0;
+        }
+        .line2 {
+            position: absolute;
+            top: 400px;
+        }
+
+        .float {
+            border: 20px solid red;
+        }
+        .img-float {
+            float: left;
+        }
+        .clear::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+    </style>
+
+    <div class="line1">
+        <div class="float">
+            <img class="img-float" src="../img.jpg" alt="">
+        </div>
+    </div>
+
+    <div class="line2">
+        <div class="float clear">
+            <img class="img-float" src="../img.jpg" alt="">
+        </div>
+    </div>
+
+</body>
+</html>
