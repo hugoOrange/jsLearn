@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Margin</title>
+</head>
+<body>
+    
+    <style>
+        .div-with-pos {
+            position: absolute;
+            left: 0; right: 0;
+        }
+
+        .fill-div {
+            height: 200px;
+            background-color: beige;
+        }
+        .fill-div-son {
+            height: 100px;
+            margin: auto;
+            background-color: rosybrown;
+        }
+        
+        .box {
+            height: 100px;
+            background-color: blanchedalmond;
+        }
+        .child {
+            height: 80px;
+            margin-bottom: 100px;
+            background-color: blueviolet;
+        }
+    </style>
+
+    <div></div>
+    <div class="div-with-pos"></div>
+
+    <div class="fill-div">
+        <div class="fill-div-son"></div>
+    </div>
+    <div class="box">
+        <div class="child"></div>
+    </div>
+</body>
+</html>

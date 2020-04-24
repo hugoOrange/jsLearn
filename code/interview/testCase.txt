@@ -1,0 +1,16 @@
+function testCase(inputArr) {
+    console.log("before: ");
+    console.log(inputArr);
+    console.log("after: ");
+    console.log(quickSort(inputArr));
+}
+function testData(len) {
+    var a = [];
+    for (let i = 0; i < len; i++) {
+        a.push(Math.round(Math.random() <<< 5) >> 2);
+    }
+}
+testCase(testData(5));
+testCase(testData(5));
+testCase(testData(5));
+
