@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Width Render</title>
+</head>
+<body>
+    <style>
+        .outside {
+            display: inline-block;
+            white-space: nowrap;
+            background: red;
+        }
+        .img {
+        }
+        .txt {
+            display: inline-block;
+            width: 100%;
+            background: green;
+            color: white;
+            vertical-align: bottom;
+        }
+    </style>
+
+    <!--
+        宽度渲染顺序，
+        1. 先解析外部DOM元素(.outside)，渲染其宽度（内部图片+内部文字）
+        [这属于未定义行为，各浏览器的操作不一，
+        Chrome: 此时(.txt)文字仅根据内容渲染，其width:100%未生效]
+        2. 解析内部元素(.txt)，渲染其宽度
+    -->
+    
+    <div class="outside">
+        <img class="img" src="../img.jpg" alt="">
+        <span class="txt">这是一段文字</span>
+    </div>
+</body>
+</html>

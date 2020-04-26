@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Width:auto</title>
+</head>
+<body>
+
+    <!-- width: auto; 的作用 -->
+    
+    <style>
+        div {
+            border: 1px solid blue;
+            margin: 10px 0;
+        }
+
+    </style>
+
+    <div class="fill-available">
+        fill-available (充分利用可用空间)
+    </div>
+
+    <div class="shrink-to-fit" style="position: absolute;top: 50px;">
+        shrink-to-fit (收缩与包裹)
+        position: absolute;
+    </div>
+    <div class="shrink-to-fit" style="float: left;margin-top: 50px;">
+        shrink-to-fit (收缩与包裹)
+        float: left;
+    </div>
+    <div class="shrink-to-fit" style="display: inline-block;">
+        shrink-to-fit (收缩与包裹)
+        display: inline-block;
+    </div>
+    <table class="shrink-to-fit" style="border: 1px solid blue;">
+        <tr>
+            <th>
+                shrink-to-fit (收缩与包裹)
+            </th>
+        </tr>
+        <tr>
+            <td>
+                display: inline-block;
+            </td>
+        </tr>
+    </table>
+
+    <div class="min-content" style="width: 300px;">
+        <table style="table-layout: auto;">
+            <tr>
+                <td>
+                    收缩到最小第一列第一列第一列第一列第一列第一列第一列第一列第一列第一列 
+                </td>
+                <td>
+                    当每一列空间都不够的时候，文字能断就断，但中文是随便断的，英文单词不能断。于是，第一列被无情地每个字都断掉，形成一柱擎天。这种行为在规范中被描述为“preferred minimum width”或者“minimum content width”。后来还有了一个更加好听的名字 min-content。
+                </td>
+                <td>
+                    当每一列空间都不够的时候，文字能断就断，但中文是随便断的，英文单词不能断。于是，第一列被无情地每个字都断掉，形成一柱擎天。这种行为在规范中被描述为“preferred minimum width”或者“minimum content width”。后来还有了一个更加好听的名字 min-content。
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="max-content" style="width: 200px; white-space: nowrap;">
+        <div>
+            超出父元素容器限制，但是子元素又设置了white-space:nowrap;
+        </div>
+    </div>
+
+</body>
+</html>
