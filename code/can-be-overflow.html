@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Can Be Overflow</title>
+</head>
+<body>
+    <style>
+        .outer {
+            height: 200px; width: 200px;
+            background: darkgray;
+            border: 1px solid blue;
+
+            overflow-x: hidden;
+            overflow-y: visible;
+        }
+        .inner {
+            height: 300px; width: 300px;
+            background: darkkhaki;
+        }
+    </style>
+
+    <div class="outer">
+        <div class="inner"></div>
+    </div>
+</body>
+</html>

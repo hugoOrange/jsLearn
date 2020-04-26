@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Line Height</title>
+</head>
+<body>
+    <style>
+        .box {
+            height: 200px;
+            line-height: 200px;
+            background-color: darkgray;
+            text-align: center;
+        }
+        .box > .img {
+            height: 100px;
+            vertical-align: middle;
+        }
+
+        .box2 {
+            display: table-cell;
+            height: 200px;
+            background-color: darkgray;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .box2 > .img {
+            height: 100px;
+        }
+
+        .box3 {
+            background-color: darkgray;
+        }
+        .box3 > .img {
+            height: 100px;
+        }
+
+        .font-box {
+            line-height: 32px;
+        }
+        .font-box > .font {
+            font-size: 24px;
+        }
+    </style>
+
+    <div class="box">
+        <img src="./layout/flexbox.png" alt="" height="126" class="img">
+    </div>
+
+    <hr>
+
+    <div class="box2">
+        <img src="./layout/flexbox.png" alt="" height="126" class="img2">
+    </div>
+
+    <hr>
+
+    <div class="box3">
+        <img src="./layout/flexbox.png" alt="" height="126" class="img3">
+    </div>
+
+    <hr>
+
+    <div class="font-box">
+        x<span class="font">文字x</span>
+    </div>
+</body>
+</html>

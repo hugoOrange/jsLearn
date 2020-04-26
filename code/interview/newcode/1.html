@@ -1,0 +1,142 @@
+<!-- 用HTML/CSS实现下面的图片内容 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <style>
+        .song-list-container {
+            border: 1px solid #dddddd;
+            width: 240px;
+        }
+        
+        .header {
+            border-bottom: 1px solid #dddddd;
+            background: linear-gradient(to bottom, #fff, #eee);
+        }
+        .body {
+        }
+        .footer {
+            display: flex;
+            padding: 0 6px;
+            margin-bottom: 4px;
+            justify-content: space-between;
+        }
+
+        .header .title {
+            padding-left: 6px;
+            margin: 0;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .song-container {
+            padding: 0;
+            margin: 6px 0;
+            counter-reset: songIndex;
+        }
+        .song-cell::before {
+            content: counter(songIndex);
+            counter-increment: songIndex;
+            margin-left: 6px;
+            width: 16px;
+            font-size: 14px;
+            color: #dd5522;
+        }
+        .song-cell {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .song-container .song-cell:first-child::before {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .song-cell .play-btn {
+            width: 14px; height: 14px;
+            border-radius: 50%;
+            border: 1px solid #777;
+            background: linear-gradient(to bottom, #fff, #eee);
+        }
+        .song-cell .play-btn::after {
+            content: '';
+            position: absolute;
+            margin-top: 4px;
+            margin-left: 6px;
+            border-top: 3px solid transparent;
+            border-bottom: 3px solid transparent;
+            border-left: 3px solid #0000ff;
+            border-right: 0;
+        }
+        .song-cell .song-name {
+            margin-left: 8px;
+            color: #0000ff;
+            text-decoration: underline;
+        }
+        .song-cell .song-owner {
+            position: absolute;
+            right: 0;
+            width: 60px;
+            color: #0000ff;
+            text-decoration: underline;
+        }
+        .song-cell.active .song-name {
+            font-weight: bold;
+        }
+
+        .more-btn {
+            padding: 0;
+            border: none;
+            color: #0000ff;
+            background: none;
+            text-decoration: underline;
+        }
+        .all-btn {
+            border: 1px solid #aaaaaa;
+            border-radius: 4px;
+            background:linear-gradient(to bottom, #fff, #eee);
+        }
+    </style>
+    
+    <div class="song-list-container">
+        <div class="header">
+            <h1 class="title">歌曲TOP500</h1>
+        </div>
+
+        <div class="body">
+            <ul class="song-container">
+                <li class="song-cell active">
+                    <span class="play-btn"></span>
+                    <span class="song-name">江南style</span>
+                    <span class="song-owner">psy</span>
+                </li>
+                <li class="song-cell">
+                    <span class="play-btn"></span>
+                    <span class="song-name">北京北京</span>
+                    <span class="song-owner">汪峰</span>
+                </li>
+                <li class="song-cell">
+                    <span class="play-btn"></span>
+                    <span class="song-name">我的歌声里</span>
+                    <span class="song-owner">曲婉婷</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <button class="more-btn">更多>></button>
+            <button class="all-btn">试听全部</button>
+        </div>
+    </div>
+</body>
+</html>

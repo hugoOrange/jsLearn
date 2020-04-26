@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Line Height</title>
+</head>
+<body>
+
+    <!-- inline-block 元素规则：一个 inline-block 元素，
+        如果里面没有内联元素，或者 overflow 不是 visible，
+        则该元素的基线就是其 margin 底边缘；
+        否则其基线就是元素里面最后一行内联元素的基线。 -->
+    <!-- vertial-align:top 就是垂直上边缘对齐，具体定义如下。
+        内联元素：元素底部和当前行框盒子的顶部对齐。
+        table-cell 元素：元素底 padding 边缘和表格行的顶部对齐。 -->
+
+    <style>
+        .box > .dib-baseline {
+            display: inline-block;
+            height: 100px; width: 100px;
+            border: 1px solid #3646f8;
+            background-color: #66d6f8;
+        }
+
+        .box4 {
+            background-color: darkgray;
+            text-align: justify; 
+        }
+        .box4 > .justify-fix {
+            display: inline-block; 
+            width: 96px; 
+        }
+    </style>
+
+    <div class="box">
+        <div class="dib-baseline"></div>
+        <div class="dib-baseline">x-baseline</div>
+    </div>
+
+    <hr>
+
+    <div class="box4"> 
+        <img src="./layout/flexbox.png" width="96"> 
+        <img src="./layout/flexbox.png" width="96"> 
+        <img src="./layout/flexbox.png" width="96"> 
+        <img src="./layout/flexbox.png" width="96"> 
+        <i class="justify-fix"></i> 
+        <i class="justify-fix"></i> 
+        <i class="justify-fix"></i> 
+    </div> 
+</body>
+</html>
